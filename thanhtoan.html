@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <h2>THANH TOÁN</h2>
+        
+        <form id="checkoutForm">
+            <label>Họ và tên *</label>
+            <input type="text" id="fullname" required>
+
+            <label>Số điện thoại *</label>
+            <input type="text" id="phone" required>
+
+            <label>Email *</label>
+            <input type="email" required>
+
+            <label>Địa chỉ *</label>
+            <input type="text" required>
+
+            <button type="submit" id="btnDatHang">Đặt hàng</button>
+        </form>
+
+        <div class="order-summary">
+            <h3>Tóm tắt đơn hàng</h3>
+            <div id="cart-summary"></div>
+            <p><strong>Tạm tính:</strong> <span id="subtotal">0đ</span></p>
+            <p><strong>Phí vận chuyển:</strong> <span id="shipping">Miễn phí</span></p>
+            <p><strong>Tổng cộng:</strong> <span id="total">0đ</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Chặn nhập chữ vào ô số điện thoại (chỉ cho phép nhập số)
+        document.getElementById("phone").addEventListener("input", function (e) {
+            this.value = this.value.replace(/[^0-9]/g, ""); // Chỉ giữ lại số
+        });
+
+        // Tự động chuyển họ và tên thành chữ in hoa
+        document.getElementById("fullname").addEventListener("input", function () {
+            this.value = this.value.toUpperCase();
+        });
+
+        // Hiển thị sản phẩm đã chọn từ giỏ hàng
+        function loadCartSummary() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartSummary = document.getElementById("cart-summary");
+            let subtotal = 0;
+
+            cartSummary.innerHTML = "";
+
+            cart.forEach(item => {
+                let total = item.price * item.quantity;
+                subtotal += total;
+
+                cartSummary.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" width="50">
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>${formatPrice(total)}</span>
+                    </div>
+                `;
+            });
+
+            document.getElementById("subtotal").innerText = formatPrice(subtotal);
+            document.getElementById("total").innerText = formatPrice(subtotal);
+        }
+
+        function formatPrice(price) {
+            return price.toLocaleString("vi-VN") + "đ";
+        }
+
+        document.getElementById("checkoutForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Ngăn chặn reload trang
+
+    Swal.fire({
+        title: "🎉 Đặt hàng thành công!",
+        text: "Cảm ơn bạn đã mua hàng. Đơn hàng sẽ được xử lý sớm!",
+        icon: "success",
+        showConfirmButton: false, // Ẩn nút OK
+        timer: 3000, // Hiển thị trong 3 giây
+        timerProgressBar: true
+    }).then(() => {
+        // Hiệu ứng pháo hoa
+        for (let i = 0; i < 10; i++) {
+            let firework = document.createElement("div");
+            firework.className = "firework";
+            firework.style.left = Math.random() * window.innerWidth + "px";
+            firework.style.top = Math.random() * window.innerHeight + "px";
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(firework);
+            setTimeout(() => firework.remove(), 1000);
+        }
+
+        // Xóa giỏ hàng sau khi đặt hàng
+        localStorage.removeItem("cart");
+
+        // Chờ hiệu ứng pháo hoa kết thúc rồi chuyển trang
+        setTimeout(() => {
+            window.location.href = "shop.html"; // Chuyển hướng sau 0.1 giây
+        }, 100);
+    });
+});
+
+
+        document.addEventListener("DOMContentLoaded", loadCartSummary);
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .checkout-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #057df4;
+            color: rgba(248, 248, 248, 0.856);
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .order-summary {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item img {
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
+</body>
+</html>

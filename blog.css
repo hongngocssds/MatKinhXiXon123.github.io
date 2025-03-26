@@ -1,0 +1,114 @@
+/* 📌 Định dạng nền trang */
+body {
+    background: url('img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN STANDEE  (6000 x 4000 px).png') no-repeat center center/cover;
+    background-attachment: fixed;
+    color: black;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* 📌 Định dạng thanh điều hướng */
+.navbar {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 40px;
+    padding: 10px 20px;
+    max-width: 90%;
+    margin: 20px auto;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 🖼️ Căn chỉnh logo */
+.navbar-brand img {
+    height: 60px;
+    width: auto;
+}
+
+/* 🔹 Menu */
+.navbar-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-nav > li > a {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: black;
+    padding: 8px 12px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.navbar-nav > li > a:hover {
+    color: #ff5733;
+}
+
+/* 🛍️ Cart & Heart icon */
+.navbar-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-icons a {
+    font-size: 1.8rem;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar-icons a:hover {
+    color: #ff5733;
+}
+
+/* 📌 Phần hình ảnh tiêu đề (Hero Section) */
+
+/* 📌 Chỉnh lại phần Hero */
+.hero {
+    width: 100%;
+    height: 450px; /* Giữ chiều cao cố định */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 2; /* Đảm bảo Hero nằm phía trên nền */
+}
+
+/* 📌 Căn chỉnh nội dung bài viết */
+.content {
+    background: rgba(255, 255, 255, 0.95); /* Tăng độ đậm để nổi bật hơn */
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+
+    /* Chỉnh lại khoảng cách với Hero */
+    margin: 30px auto; /* Đẩy xuống xa hơn */
+    position: relative;
+    z-index: 3; /* Đảm bảo nằm trên Hero */
+}
+
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .hero {
+        height: 350px;
+    }
+
+    .hero .overlay {
+        padding: 30px;
+    }
+
+    .content {
+        padding: 20px;
+        margin: -30px auto 20px; /* Điều chỉnh để vẫn sát với Hero */
+    }
+}

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm</title>
+    <link rel="stylesheet" href="product-detail.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN logo.png" alt="Logo" class="logo">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+
+                <!-- Giỏ hàng -->
+                <a href="cart.html" class="btn btn-light ms-3">
+                    <i class="fa fa-shopping-cart"></i> <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nội dung chi tiết sản phẩm -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="product-image" src="" class="img-fluid" alt="Sản phẩm">
+                <div id="lens" class="lens"></div> <!-- Kính lúp -->
+            <div id="zoom-result"></div>
+                <!-- Thay đổi phần danh sách ảnh phụ thành danh sách màu sắc -->
+        <div>
+</div>
+
+<style>
+    .color-option {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 10px;
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        transition: 0.3s;
+    }
+    .color-option:hover, .color-option.active {
+        border: 0.5px solid #00c6ff;
+        box-shadow: 0 0 10px rgba(0, 198, 255, 0.6);}
+</style>
+
+
+                
+            </div>
+            <div class="col-md-6">
+                <h2 id="product-name"></h2>
+                <p id="product-price" class="text-danger fw-bold"></p>
+                <div class="d-flex mt-2" id="color-options"></div>
+                <p id="product-description"></p>
+                
+
+                <div class="d-flex">
+                    <input type="number" id="quantity" value="1" min="1" class="form-control w-25 me-2" oninput="updateTotal()">
+                    <button class="btn btn-primary" onclick="addToCart()">Thêm vào giỏ hàng</button>
+                </div>
+
+                <!-- Hiển thị tổng tiền khi thay đổi số lượng -->
+                <p class="mt-3 fw-bold">Tổng tiền: <span id="total-price">0đ</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+       
+        let products = [
+        {
+            id: 1, 
+        name: "Kính râm thời trang", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR101.png", 
+        category: "Kính râm",
+        description: "🔹Loại sản phẩm: Kính râm thời trang\n🔹Kiểu dáng: Hiện đại, sang trọng\n\n✅ Ưu điểm nổi bật:\n• Thiết kế thời trang, phong cách sang trọng và cá tính\n• Tròng kính chống tia UV, bảo vệ mắt khỏi ánh nắng mặt trời\n• Phù hợp với nhiều phong cách thời trang khác nhau\n• Gọng kính nhẹ, thoải mái khi đeo suốt cả ngày\n• Phụ kiện không thể thiếu để nâng tầm gu thời trang của bạn",
+
+        colors: [
+            { name: "Đen", hex: "#5e4a65", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR101.png" },
+            { name: "Xanh", hex: "#5e6d84", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR102.png" }
+         
+        ]
+    },
+    {
+        id: 2, 
+        name: "Gọng kính nhựa dẻo mắt mèo", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD201.png", 
+        category: "gọng kính",
+        description: "Gọng kính dẻo GD201 là mẫu kính nhẹ, bền bỉ và linh hoạt, mang đến sự thoải mái tối đa khi đeo. Thiết kế hiện đại, phù hợp cho cả nam và nữ, giúp tôn lên đường nét khuôn mặt và tạo phong cách trẻ trung, thanh lịch.\n🔹 Chất liệu: Nhựa dẻo cao cấp, đàn hồi tốt, chống gãy vỡ.\n🔹 Kích thước: 52-18-148mm.\n🔹 Đặc điểm nổi bật: Siêu nhẹ & linh hoạt, chống va đập tốt, thiết kế hiện đại phù hợp nhiều phong cách.\n🔹 Lưu ý: Tránh tiếp xúc với nhiệt độ cao và hóa chất mạnh, vệ sinh kính bằng khăn mềm và dung dịch chuyên dụng, bảo quản trong hộp để tránh trầy xước.",
+
+        subcategory: "nhựa",
+        colors: [
+            { name: "Trắng", hex: "#8c8e89", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD201.png" },
+            { name: "Hồng", hex: "#141312", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD202.png" }
+        ]
+    },
+    {
+        id: 3, 
+        name: "Gọng kính nhựa dẻo tròn", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD301.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        description: "Gọng kính dẻo GD301 sở hữu thiết kế trẻ trung với chất liệu nhựa dẻo cao cấp, mang lại độ bền, linh hoạt và trọng lượng nhẹ. Kính ôm sát khuôn mặt, tạo cảm giác thoải mái khi đeo.\n🔹 Chất liệu: Nhựa dẻo cao cấp, đàn hồi tốt.\n🔹 Kích thước: 50-17-142mm.\n🔹 Đặc điểm nổi bật: Bền bỉ, chống gãy vỡ, nhẹ nhàng, phù hợp đeo hàng ngày.\n🔹 Lưu ý: Tránh nhiệt độ cao, vệ sinh thường xuyên, bảo quản trong hộp để tránh trầy xước.",
+        colors: [
+            { name: "Nâu", hex: "#131312", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD301.png" },
+            { name: "Ghi", hex: "#c5b4aa", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD302.png" },
+            { name: "Ghi", hex: "#ebe0df", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD303.png" },
+        ]
+    },
+    {
+        id: 4, 
+        name: "Gọng kính nhựa dẻo BROWNLINE", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD401.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        description: "Gọng kính dẻo GD401 mang thiết kế hiện đại, nhỏ gọn và linh hoạt, phù hợp với người dùng yêu thích sự nhẹ nhàng và bền bỉ. Sản phẩm đáp ứng nhu cầu vừa thời trang vừa tiện dụng trong cuộc sống hàng ngày.\n🔹 Chất liệu: Nhựa dẻo cao cấp, bền bỉ và đàn hồi tốt.\n🔹 Kích thước: 47-17-140mm.\n🔹 Đặc điểm nổi bật: Trọng lượng nhẹ, giảm áp lực lên mũi và tai, chất liệu dẻo hạn chế gãy vỡ, thiết kế tối giản thanh lịch.\n🔹 Lưu ý: Tránh nhiệt độ cao, vệ sinh thường xuyên bằng khăn mềm, bảo quản trong hộp để giữ kính luôn sạch đẹp.",
+
+        colors: [
+            { name: "Nâu", hex: "#e5e4e4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD401.png" },
+            { name: "Đen", hex: "#151515", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD402.png" },
+        ]
+        },
+        {
+        id: 5, 
+        name: "Gọng kính nhựa dẻo dáng vuông", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD501.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        description: "Gọng kính dẻo GD501 là sản phẩm cao cấp với thiết kế hiện đại, thanh lịch, phù hợp cho cả nam và nữ. Chất liệu dẻo bền bỉ giúp gọng kính linh hoạt và thoải mái khi sử dụng hàng ngày.\n🔹 Chất liệu: Nhựa dẻo cao cấp, siêu nhẹ và bền chắc.\n🔹 Kích thước: 56-17-149mm.\n🔹 Đặc điểm nổi bật: Chất liệu dẻo hạn chế gãy vỡ, trọng lượng nhẹ giúp đeo lâu không gây khó chịu, thiết kế tinh tế phù hợp với nhiều phong cách.\n🔹 Lưu ý: Tránh nhiệt độ cao và hóa chất mạnh, vệ sinh bằng khăn mềm và dung dịch chuyên dụng, bảo quản trong hộp để tránh trầy xước.",
+
+        colors: [
+            { name: "Xanh biển", hex: "#434345", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD501.png" },
+            { name: "Đen", hex: "#0a0b0a", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD502.png" }
+        ]
+    },
+    {
+        id: 6, 
+        name: "Kính râm phân cực", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR201.png", 
+        category: "Kính râm",
+        description: "🔹Loại sản phẩm: Kính râm phân cực\n🔹Kiểu dáng: Thể thao, năng động\n✅ Ưu điểm nổi bật:\n• Tròng kính phân cực giúp giảm chói lóa khi đi nắng hoặc lái xe\n• Công nghệ chống tia UV400, bảo vệ mắt toàn diện\n• Thiết kế thời trang, phù hợp cho các hoạt động ngoài trời\n• Gọng kính siêu nhẹ, ôm sát khuôn mặt tạo cảm giác chắc chắn\n• Lý tưởng cho những ai yêu thích du lịch, thể thao và di chuyển nhiều",
+
+        colors: [
+            { name: "Tím", hex: "#8c7b5e", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR201.png" },
+            { name: "Xám", hex: "#6b626c", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR202.png" }
+        ]
+    },
+    {
+        id: 7, 
+        name: "Kính râm mèo", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR301.png", 
+        category: "Kính râm",
+        description: "🔹Loại sản phẩm: Kính râm mắt mèo\n🔹Màu sắc: Đen, nâu, hồng, xanh rêu\n🔹Kiểu dáng: Mắt mèo thời thượng\n✅ Ưu điểm nổi bật:\n• Thiết kế mắt mèo thanh lịch, giúp tôn lên đường nét khuôn mặt\n• Chống tia UV400, bảo vệ mắt khỏi tác động của ánh nắng mặt trời\n• Gọng kính chắc chắn, nhẹ nhàng và thoải mái khi đeo\n• Phù hợp với nhiều phong cách thời trang, từ cá tính đến sang trọng\n• Phụ kiện không thể thiếu để hoàn thiện outfit mỗi ngày",
+
+        colors: [
+            { name: "Tím", hex: "#f7dbb4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR301.png" },
+            { name: "Xám", hex: "#eadcd2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR302.png" }
+        ]
+    },
+    {
+        id: 8, 
+        name: "Gọng kính mắt mèo nhựa cứng", 
+        price: "360000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC101.png", 
+        category: "gọng kính",
+        subcategory: "nhựa cứng",
+        description: "Gọng kính NC101 mang phong cách thời trang nữ tính với thiết kế mắt mèo cá tính, ấn tượng. Phù hợp với những ai yêu thích sự thanh lịch, hiện đại và nổi bật, dễ dàng kết hợp với nhiều kiểu trang phục.\n🔹 Chất liệu: Nhựa cao cấp nhẹ, bền, chống trầy xước. Càng kính kim loại hoặc nhựa chắc chắn, mang lại sự thoải mái khi đeo.\n🔹 Kích thước: 54-16-147mm.\n🔹 Đặc điểm nổi bật: Thiết kế mắt mèo tạo điểm nhấn ấn tượng, tôn lên nét thanh lịch và sang trọng. Gọng kính chắc chắn nhưng nhẹ, mang lại cảm giác dễ chịu khi sử dụng. Phù hợp với môi trường công sở và các dịp đặc biệt.\n🔹 Ứng dụng: Thích hợp để lắp kính cận, kính viễn hoặc kính thời trang. Phù hợp sử dụng hàng ngày hoặc trong các sự kiện quan trọng.\n🔹 Lưu ý: Tránh va đập mạnh để bảo vệ kính. Lau kính bằng khăn mềm để giữ sạch và sáng bóng. Bảo quản trong hộp khi không sử dụng để tránh bụi bẩn và trầy xước.",
+
+        colors: [
+            { name: "Trắng", hex: "#dbdbd7", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC101.png" },
+            { name: "Đen", hex: "#624b44", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC102.png" }
+        ]
+    },
+    {
+        id: 9, 
+        name: "Gọng kính nhựa cứng kim loại cao cấp", 
+        price: "700000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC201.png", 
+        category: "gọng kính",
+        subcategory: "nhựa cứng",
+        description: "Gọng kính NC201 là sự kết hợp hoàn hảo giữa nhựa cứng cao cấp và kim loại, tạo nên vẻ ngoài thanh lịch, hiện đại. Thiết kế tinh tế, bền bỉ và nhẹ giúp người đeo cảm thấy thoải mái trong thời gian dài.\n🔹 Chất liệu: Gọng kính nhựa cứng cao cấp, chống trầy xước, chịu lực tốt. Càng kính kim loại chắc chắn, mang lại độ bền và sự ổn định.\n🔹 Kích thước: 54-17-147mm.\n🔹 Đặc điểm nổi bật: Thiết kế thanh lịch, phù hợp với nhiều kiểu khuôn mặt. Chất liệu cao cấp giúp đảm bảo độ bền và sự thoải mái. Gọng kính kết hợp giữa nhựa cứng và kim loại mang lại vẻ ngoài hiện đại, chắc chắn.\n🔹 Lưu ý: Tránh va đập mạnh để giữ kính bền lâu. Vệ sinh bằng khăn mềm để đảm bảo độ sáng bóng. Bảo quản trong hộp khi không sử dụng để tránh trầy xước.",
+
+        colors: [
+            { name: "Vàng", hex: "#10110e", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC201.png" },
+            { name: "Xanh lá", hex: "#2e2923", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC202.png" }
+        ]
+    },
+    {
+        id: 10, 
+        name: "Gọng kính nhựa ACETATE cao cấp", 
+        price: "800000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA101.png", 
+        category: "gọng kính",
+        subcategory: "Acetate",
+        description: "Gọng kính NA101 là sự kết hợp hoàn hảo giữa nhựa cứng cao cấp và kim loại, mang đến sự bền bỉ, sang trọng và thời trang. Thiết kế tinh tế phù hợp với nhiều độ tuổi, giúp tôn lên vẻ thanh lịch và phong cách hiện đại.\n🔹 Chất liệu: Gọng kính nhựa cứng cao cấp, chống trầy xước, bền bỉ theo thời gian. Càng kính kim loại chắc chắn, đảm bảo độ bền và sự thoải mái khi đeo.\n🔹 Kích thước: 50-20-144mm.\n🔹 Đặc điểm nổi bật: Bền bỉ & chắc chắn với chất liệu cao cấp. Thiết kế nhẹ nhàng, không gây áp lực lên mũi và tai, mang lại sự thoải mái khi đeo. Phong cách hiện đại, phù hợp với công việc và thời trang hàng ngày.\n🔹 Lưu ý: Tránh va đập mạnh để duy trì độ bền của kính. Vệ sinh kính thường xuyên bằng khăn mềm và dung dịch chuyên dụng. Cất giữ kính vào hộp để tránh trầy xước khi không sử dụng.",
+
+        colors: [
+            { name: "Vàng", hex: "#9198a2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA101.png" }
+            
+        ]
+    },
+    {
+        id: 11, 
+        name: "Gọng kính nhựa ACETATE", 
+        price: "720000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA201.png", 
+        category: "gọng kính",
+        subcategory: "Acetate",
+        description: "Gọng kính NA201 mang thiết kế hiện đại, kết hợp giữa chất liệu nhựa cứng và kim loại cao cấp. Đây là sự lựa chọn lý tưởng cho những ai yêu thích sự bền bỉ, phong cách và thoải mái khi sử dụng.\n🔹 Chất liệu: Gọng kính nhựa cứng cao cấp, chống va đập, độ bền cao. Càng kính kim loại chắc chắn, nhẹ, đem lại cảm giác thoải mái khi đeo.\n🔹 Kích thước: 52-20/22-145/146mm.\n🔹 Đặc điểm nổi bật: Thiết kế thời trang, kiểu dáng hiện đại, phù hợp với nhiều gương mặt. Kết hợp chất liệu giúp tăng độ bền và tính thẩm mỹ. Trọng lượng nhẹ, mang lại sự thoải mái khi sử dụng trong thời gian dài.\n🔹 Ứng dụng: Phù hợp để sử dụng trong môi trường công sở, học tập hoặc các dịp giao tiếp hàng ngày.\n🔹 Lưu ý: Tránh va đập mạnh và tiếp xúc với nhiệt độ cao. Vệ sinh bằng khăn mềm để giữ gọng luôn sạch sẽ. Bảo quản trong hộp khi không sử dụng để tránh trầy xước.",
+
+        colors: [
+            { name: "Vàng", hex: "#3d4246", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA201.png" },
+            { name: "Vàng", hex: "#13171a", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA202.png" }
+            
+        ]
+    },
+    {
+        id: 12, 
+        name: "Gọng kính hợp kim TITAN", 
+        price: "840000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/KLTT101.png", 
+        category: "gọng kính",
+        subcategory: "kim loại",
+        description: "🔹Loại sản phẩm: Gọng kính hợp kim Titan\n🔹Chất liệu: Hợp kim Titan cao cấp, siêu nhẹ\n🔹Kiểu dáng: Thanh lịch, hiện đại\n\n✅ Ưu điểm nổi bật:\n• Chất liệu Titan siêu nhẹ, tạo cảm giác thoải mái khi đeo suốt cả ngày\n• Độ bền cao, chống ăn mòn và chịu lực tốt\n• Thiết kế tinh tế, phù hợp với nhiều phong cách và khuôn mặt\n• Bản lề linh hoạt, dễ dàng điều chỉnh, giúp ôm sát khuôn mặt\n• Phù hợp cho cả nam và nữ, có thể lắp tròng cận, viễn, loạn theo nhu cầu",
+
+        colors: [
+            { name: "Bạc", hex: "#e5e3e2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/KLTT101.png" },
+            { name: "Đồng", hex: "#947f66", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/KLTT1022.png" }
+        ]
+    },
+    
+    {
+        id: 13,
+        name: "Gọng kính nhựa pha kim loại",
+        price: "1350000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        description: "Gọng kính NPKL101 là sự kết hợp giữa nhựa cứng cao cấp và kim loại, mang đến vẻ ngoài hiện đại, sang trọng. Thiết kế nhẹ nhàng, ôm sát khuôn mặt, giúp người đeo cảm thấy thoải mái suốt cả ngày.\n🔹 Chất liệu: Gọng kính nhựa cứng cao cấp, bền bỉ, chống trầy xước. Càng kính kim loại chắc chắn, giúp tăng độ bền và sự ổn định khi sử dụng.\n🔹 Kích thước: 50-16-142mm.\n🔹 Đặc điểm nổi bật: Thiết kế gọn nhẹ, phù hợp với nhiều kiểu khuôn mặt. Sự kết hợp giữa nhựa cứng và kim loại tạo nên vẻ ngoài tinh tế, chắc chắn. Gọng kính cao cấp mang lại cảm giác thoải mái khi đeo trong thời gian dài.\n🔹 Lưu ý: Tránh va đập mạnh để giữ kính bền lâu. Vệ sinh kính bằng khăn mềm để đảm bảo độ sáng bóng. Bảo quản kính trong hộp khi không sử dụng để tránh trầy xước.",
+
+        colors: [
+        { name: "Đen", hex: "#646159", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL101.png" },
+        {name: "Nâu", hex: "#e2ba85", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL102.png" }
+        ]
+    },
+    {
+        id: 14,
+        name: "Gọng kính nhựa pha kim loại càng TITAN",
+        price: "1350000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        description: "Gọng kính viền nhựa titan cao cấp NPKL0CTT101 là sản phẩm kết hợp giữa nhựa cao cấp và titan, mang lại sự bền bỉ, nhẹ nhàng và phong cách hiện đại. Thiết kế với viền nhựa và cầu kính titan đảm bảo sự chắc chắn và vẻ ngoài sang trọng, phù hợp cho những người yêu thích sự tinh tế và chất lượng cao trong sản phẩm kính của mình.\n🔹 Kích thước: 48-19-146mm.\n🔹 Đặc điểm nổi bật: Viền kính titan đảm bảo độ bền, chống gỉ, tạo sự chắc chắn và vẻ ngoài thanh lịch. Chất liệu nhựa cao cấp giúp kính nhẹ nhàng và thoải mái khi sử dụng. Thiết kế hiện đại, sang trọng, phù hợp với nhiều đối tượng và hoàn cảnh sử dụng.\n🔹 Ứng dụng: Phù hợp cho các hoạt động hàng ngày, từ công việc đến các sự kiện xã hội. Lựa chọn lý tưởng cho cả nam và nữ với thiết kế thời trang và chất liệu cao cấp.\n🔹 Lưu ý: Tránh va đập mạnh để bảo vệ gọng kính khỏi hư hại. Lau kính bằng khăn mềm để giữ bề mặt kính sạch sẽ và không bị trầy xước.",
+
+        colors: [
+            { name: "Bạc", hex: "#0d0a09", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT101.png" },
+            { name: "Vàng", hex: "#885941", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT102.png" }
+        ]
+    },
+    {
+        id: 15,
+        name: "Gọng TITAN xẻ cước cao cấp",
+        price: "980000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        
+  description: "Gọng kính TTXC101 là sự kết hợp hoàn hảo giữa titan cao cấp và xẻ cước, mang đến một thiết kế vừa sang trọng vừa chắc chắn. Sản phẩm này rất phù hợp cho những ai tìm kiếm một chiếc kính có phong cách độc đáo, bền bỉ và thoải mái khi sử dụng.\n🔹 Chất liệu: Gọng kính titan cao cấp, nhẹ và bền, giúp sản phẩm có độ ổn định cao và không bị gỉ sét. Càng kính xẻ cước đảm bảo độ chắc chắn và độ bền lâu dài.\n🔹 Kích thước: 52-17-140mm.\n🔹 Đặc điểm nổi bật: Chất liệu titan giúp gọng kính nhẹ, bền bỉ và chống gỉ sét, mang lại cảm giác thoải mái khi đeo. Thiết kế xẻ cước tăng độ chắc chắn và tạo điểm nhấn độc đáo. Phong cách hiện đại, thanh thoát nhưng vẫn đảm bảo độ chắc chắn, phù hợp với nhiều đối tượng người dùng.\n🔹 Ứng dụng: Phù hợp với nhiều dịp, từ công sở đến các sự kiện, hội họp hoặc sử dụng hàng ngày.\n🔹 Lưu ý: Tránh làm rơi hoặc va đập mạnh vào các bề mặt cứng để bảo vệ gọng kính. Lau kính bằng khăn mềm để giữ cho kính luôn sáng bóng. Bảo quản kính trong hộp khi không sử dụng để tránh trầy xước và bụi bẩn.",
+
+        colors: [
+            { name: "Đen", hex: "#bdb7b4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC101.png" },
+            { name: "Bạc", hex: "#cc9392", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC102.png" }
+        ]
+    },
+    {
+        id: 16,
+        name: "Gọng kim loại TITAN cao cấp",
+        price: "1375000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TT101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        
+  description: "Gọng kính TT101 được làm từ titan kim loại cao cấp, mang lại sự sang trọng và độ bền tuyệt vời. Với thiết kế hiện đại và thanh lịch, sản phẩm này thích hợp cho những ai tìm kiếm một chiếc kính có sự kết hợp giữa phong cách và chất lượng.\n🔹 Chất liệu: Gọng kính titan kim loại cao cấp, nhẹ, bền và chống gỉ sét, mang lại sự thoải mái khi đeo. Càng kính kim loại chắc chắn, dễ chịu và có độ bền cao.\n🔹 Kích thước: 51-18-142mm.\n🔹 Đặc điểm nổi bật: Chất liệu titan giúp gọng kính nhẹ, bền bỉ và mang lại cảm giác thoải mái khi sử dụng trong thời gian dài. Thiết kế thanh lịch với kiểu dáng mảnh mai nhưng chắc chắn, phù hợp với nhiều loại gương mặt. Chống gỉ sét, đảm bảo độ bền và vẻ ngoài luôn như mới.\n🔹 Ứng dụng: Phù hợp để sử dụng hàng ngày, đi làm, đi học hoặc tham gia các sự kiện trang trọng.\n🔹 Lưu ý: Tránh va đập mạnh để không làm hỏng gọng kính. Vệ sinh kính bằng khăn mềm để giữ cho kính luôn sạch sẽ. Bảo quản kính trong hộp khi không sử dụng để tránh trầy xước và bụi bẩn.",
+
+
+        colors: [
+            { name: "Vàng", hex: "#dda5a3", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TT101.png" },
+            { name: "Bạc", hex: "#af9e8f", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TT102.png" }
+        ]
+    },
+    {
+        id: 17,
+        name: "Hộp đựng kính da PU cao cấp",
+        price: "50000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK100.png",
+        category: "phụ kiện",
+        
+  description: "🔹Loại sản phẩm: Hộp da đựng kính cao cấp\n🔹Xuất xứ: Việt Nam\n🔹Chất liệu: Da\n🔹Màu sắc: Ngẫu nhiên\n\n✅ Ưu điểm nổi bật:\n• Bảo vệ kính khỏi va đập, chống xước và giữ kính luôn an toàn.\n• Thiết kế nhỏ gọn, thời trang, dễ dàng mang theo.\n• Chắc chắn, phù hợp với nhiều loại kính khác nhau.\n• Đặc biệt, khách hàng mua kính tại *Xí Xọn* sẽ được tặng kèm hộp đựng kính và khăn lau miễn phí!",
+
+        colors: [
+            { name: "Đen", hex: "#82b4d5", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK100.png" },
+           
+        ]
+    },
+    {
+        id: 18,
+        name: "Khăn lau kính vải sợi tằm",
+        price: "8000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK200.png",
+        category: "phụ kiện",
+        description: "🔹Loại sản phẩm: Khăn lau kính mắt\n🔹Xuất xứ: Việt Nam\n🔹Chất liệu: Vải sợi tằm\n\n✅ Ưu điểm nổi bật khăn lau kính:\n• Thiết kế nhỏ gọn, tiện lợi, dễ mang theo.\n• Làm từ vải sợi tằm mềm mại, không gây trầy xước kính.\n• Ngoài lau kính mắt, còn có thể dùng để lau điện thoại, đồng hồ và các vật dụng khác.\n• Có thể kết hợp với nước rửa kính để vệ sinh kính hiệu quả hơn.",
+        colors: [
+            { name: "Trắng", hex: "#b2bfcf", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK200.png" }
+        ]
+    },
+    {
+        id: 19,
+        name: "Dung dịch vệ sinh kính 100ml",
+        price: "14000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PKDD4.png",
+        category: "phụ kiện",
+        
+    description: "🔹Loại sản phẩm: Nước rửa kính chuyên dụng\n🔹Xuất xứ: Việt Nam\n🔹Dung tích: 100ml \n\n✅ Ưu điểm nổi bật:\n• Xịt vào khăn lau kính và lau kính sáng bóng tròng mắt.\n• Tạo lớp màng bảo vệ tròng kính, giảm bám bụi và mờ sương.\n• Có thể sử dụng cho màn hình điện thoại, máy tính.\n• Giảm mỏi mắt do vết bẩn, vết xước trên tròng kính.\n• Dạng xịt hơi sương giúp tiết kiệm và dễ sử dụng.\n\n⚠️ Lưu ý: Xịt vào khăn trước rồi mới lau tròng kính để đạt hiệu quả tốt nhất.",
+
+
+        colors: [
+            { name: "Xanh", hex: "#012a5b", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PKDD4.png" }
+           
+        ]
+    },
+    {
+        id: 20,
+        name: "Túi vải đựng chống xước",
+        price: "20000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK300.png",
+        category: "phụ kiện",
+        
+    description: "🔹Loại sản phẩm: Túi vải đựng kính chống xước\n🔹Xuất xứ: Việt Nam\n🔹Chất liệu: Vải mềm cao cấp\n\n✅ Ưu điểm nổi bật:\n• Bảo vệ kính khỏi trầy xước, bụi bẩn và va đập nhẹ.\n• Chất liệu vải mềm mại, bền bỉ, không gây hại cho tròng kính.\n• Thiết kế nhỏ gọn, dễ dàng mang theo trong túi xách, balo.\n• Có thể sử dụng để đựng các vật dụng nhỏ khác như đồng hồ, tai nghe.",
+
+
+        colors: [
+            { name: "Đen", hex: "#e5e2da", img: "NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK300.png" }
+        ]
+    },
+    {
+        id: 21,
+        name: "Dây đeo kính thời trang chống rơi",
+        price: "70000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK501.png",
+        description: "🔹Loại sản phẩm: Dây đeo kính thời trang chống rơi\n🔹Chất liệu: Hợp kim cao cấp, bền đẹp\n🔹Màu sắc: Vàng, bạc\n🔹Chiều dài: 70cm\n\n✅ Ưu điểm nổi bật:\n• Giúp cố định kính, tránh rơi mất khi di chuyển.\n• Thiết kế thời trang, phù hợp với nhiều phong cách.\n• Chất liệu hợp kim chắc chắn, chống gỉ sét, sử dụng lâu dài.\n• Dễ dàng điều chỉnh và tháo lắp, phù hợp với nhiều loại kính khác nhau.\n• Thích hợp cho cả nam và nữ, dùng hàng ngày hoặc khi chơi thể thao.",
+
+        category: "phụ kiện",
+        colors: [
+            { name: "Đỏ", hex: "#d9d3d0", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK501.png" },
+            { name: "Xanh dương", hex: "#f6f5ef", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK502.png" },
+            { name: "Xanh dương", hex: "#cac6ca", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK503.png" }
+            
+        ]
+    },
+    {
+        id: 22,
+        name: "Đệm tai chống trượt",
+        price: "8000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK600.png",
+        description: "🔹Loại sản phẩm: Miếng đệm làm êm tai cho kính\n🔹Chất liệu: Silicon siêu dẻo, siêu bền, siêu chắc\n🔹Kiểu dáng: Hình móc câu\n🔹Màu sắc: Đen, trắng trong\n🔹Kích thước: Dài 4.4cm, chiều rộng lỗ xỏ 0.1 x 0.5 cm\n🔹Quy cách: 1 cặp\n\n✅ Ưu điểm nổi bật:\n• Giúp giữ kính cố định, chống trượt và rơi kính khi hoạt động mạnh, thường xuyên di chuyển hay chơi thể thao (chạy bộ, gym, cầu lông,...)\n• Mang lại cảm giác thoải mái khi đeo kính\n• Dễ sử dụng, có thể rửa sạch và tái sử dụng lâu dài\n• Phù hợp với mọi lứa tuổi sử dụng\n• Phụ kiện cần thiết cho những người đeo kính",
+
+        category: "phụ kiện",
+        colors: [
+            { name: "Đen", hex: "#d7e8f4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK600.png" }
+        ]
+    }
+,
+
+    {
+        id: 23, 
+        name: "Chemi Crystal U1 Coated 1.56 SP", 
+        price: "225000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM56U1.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#15a64b", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM56U1.png" }
+        ]
+    },
+
+    {
+        id: 24, 
+        name: "Chemi Crystal U1 Coated 1.60 SP", 
+        price: "325000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM60U1.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#f18f5e", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM60U1.png" }
+        ]
+    },
+    {
+        id: 25, 
+        name: "Chemi Crystal U1 Coated 1.67 ASP", 
+        price: "510000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM67U1.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#b674b2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM67U1.png" }
+        ]
+    },
+    {
+        id: 26, 
+        name: "Chemi Perfect UV Crystal 1.67 UV Coated", 
+        price: "990000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#f2d60b", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png" }
+        ]
+    },
+    {
+        id: 27, 
+        name: "Chemi Sun Guard U2 Coated 1.60 ASP", 
+        price: "1020000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "##f3daa5", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png" }
+        ]
+    },
+    {
+        id: 28, 
+        name: "Gọng kính nhựa pha kim loại càng TITAN", 
+        price: "1350000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT201.png", 
+        category: "gọng kính",
+        subcategory: "kim loại",
+        
+    description: "🔹Loại sản phẩm: Gọng kính viền nhựa titan cao cấp NPKL0CTT201\n🔹Xuất xứ: Việt Nam\n🔹Kích thước:\n   • Chiều rộng tròng kính: 49mm\n   • Cầu kính: 20mm\n   • Chiều dài càng kính: 148mm\n\n✅ Đặc điểm nổi bật:\n• Viền kính titan: Tăng cường độ bền, chống gỉ và tạo vẻ ngoài sang trọng.\n• Chất liệu nhựa cao cấp: Giúp gọng kính nhẹ và thoải mái khi đeo.\n• Thiết kế hiện đại: Phong cách thanh lịch, phù hợp với nhiều đối tượng.\n\n✅ Ứng dụng:\nGọng kính phù hợp cho công việc, sự kiện xã hội và sử dụng hàng ngày. Lý tưởng cho cả nam và nữ, mang lại sự sang trọng và bền bỉ.\n\n✅ Lưu ý khi sử dụng:\n• Tránh va đập mạnh để bảo vệ gọng kính.\n• Lau kính bằng khăn mềm để giữ sạch và tránh trầy xước.\n• Bảo quản kính trong hộp khi không sử dụng để tránh bụi bẩn.",
+
+
+        colors: [
+            { name: "Vàng", hex: "#23201d", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT201.png" },
+
+        ]
+    }
+];
+
+
+        let product;
+
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get("id");
+        }
+
+        function displayProductDetails() {
+    let productId = getProductIdFromURL();
+    product = products.find(p => p.id == productId);
+
+    if (product) {
+        document.getElementById("product-name").innerText = product.name;
+        document.getElementById("product-price").innerText = formatPrice(product.price);
+        document.getElementById("product-image").src = product.img;
+        let descriptionContainer = document.getElementById("product-description");
+
+// Nếu sản phẩm có mô tả thì hiển thị mô tả, nếu không thì thay bằng ảnh
+if (product.description && product.description.trim() !== "") {
+    descriptionContainer.innerText = product.description;
+} else {
+    descriptionContainer.innerHTML = `<img src="img/hdmh.jpg" alt="Mô tả sản phẩm" class="description-img">`;
+}
+
+
+        // Hiển thị các màu sắc
+        let colorOptions = document.getElementById("color-options");
+        colorOptions.innerHTML = "";
+
+        if (product.colors && product.colors.length > 0) {
+            product.colors.forEach((color, index) => {
+                let colorDiv = document.createElement("div");
+                colorDiv.classList.add("color-option");
+                colorDiv.style.backgroundColor = color.hex;
+                colorDiv.setAttribute("data-img", color.img);
+                colorDiv.setAttribute("data-name", color.name);
+
+                if (index === 0) {
+                    colorDiv.classList.add("active"); // Chọn màu đầu tiên
+                }
+
+                colorDiv.addEventListener("click", function () {
+                    document.getElementById("product-image").src = this.getAttribute("data-img");
+
+                    // Loại bỏ active khỏi các màu khác
+                    document.querySelectorAll(".color-option").forEach(el => el.classList.remove("active"));
+                    this.classList.add("active");
+                });
+
+                colorOptions.appendChild(colorDiv);
+            });
+        }
+
+        updateTotal();
+    } else {
+        document.querySelector(".container").innerHTML = "<h3 class='text-center text-danger'>Sản phẩm không tồn tại!</h3>";
+    }
+}
+
+
+        function updateTotal() {
+            let quantity = document.getElementById("quantity").value;
+
+            // Loại bỏ ký tự 'đ' và dấu chấm, sau đó chuyển thành số
+            let price = parseFloat(product.price); 
+if (isNaN(price)) price = 0; // Tránh lỗi nếu giá trị không hợp lệ
+
+
+            let total = price * quantity;
+            document.getElementById("total-price").innerText = formatPrice(total);
+        }
+
+        function addToCart() {
+            let quantity = document.getElementById("quantity").value;
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            let existingProduct = cart.find(item => item.id == product.id);
+
+            if (existingProduct) {
+                existingProduct.quantity += parseInt(quantity);
+            } else {
+                cart.push({ id: product.id, name: product.name, price: product.price, img: product.img, quantity: parseInt(quantity) });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            alert(`Đã thêm ${quantity} sản phẩm vào giỏ hàng!`);
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById("cart-count").innerText = totalCount;
+        }
+
+        function changeImage(thumbnail) {
+            let mainImage = document.getElementById("product-image");
+            mainImage.src = thumbnail.src;
+        }
+
+        function formatPrice(price) {
+    return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price);
+}
+
+        
+
+     document.addEventListener("DOMContentLoaded", () => {
+            displayProductDetails();
+            updateCartCount();
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+    let image = document.getElementById("product-image");
+    let lens = document.getElementById("lens");
+    let zoomResult = document.getElementById("zoom-result");
+
+    let zoomFactor = 3.6; // Mức độ phóng đi
+    let lensSize = 200; // Kích thước lens
+
+    image.addEventListener("mousemove", moveLens);
+    image.addEventListener("mouseleave", function () {
+        lens.style.display = "none";
+        zoomResult.style.display = "none";
+    });
+
+    function moveLens(event) {
+        let { left, top, width, height } = image.getBoundingClientRect();
+
+        // Lấy tọa độ con trỏ trong ảnh
+        let x = event.clientX - left;
+        let y = event.clientY - top; 
+
+        // Giữ lens không bị tràn khỏi ảnh
+        let lensHalf = lensSize / 2;
+        x = Math.max(lensHalf, Math.min(x, width - lensHalf));
+        y = Math.max(lensHalf, Math.min(y, height - lensHalf));
+
+        // Hiển thị lens & zoom-result
+        lens.style.display = "block";
+        zoomResult.style.display = "block";
+
+        // Định vị lens chính giữa con trỏ chuột
+        lens.style.left = `${x}px`;
+        lens.style.top = `${y}px`;
+        
+
+        // Cập nhật background của zoom-result
+        zoomResult.style.backgroundImage = `url(${image.src})`;
+        zoomResult.style.backgroundSize = `${width * zoomFactor}px ${height * zoomFactor}px`;
+        zoomResult.style.backgroundPosition = `-${(x * zoomFactor - 128 )}px -${(y * zoomFactor - 128 )}px`;
+    }
+});
+document.addEventListener("DOMContentLoaded", function () {
+    var description = document.getElementById("product-description");
+    var toggleButton = document.createElement("button");
+    toggleButton.id = "toggle-button";
+    toggleButton.innerText = "Xem thêm";
+
+    // Chỉ thêm nút nếu nội dung vượt quá 500px
+    if (description.scrollHeight > 350) {
+        description.appendChild(toggleButton);
+        toggleButton.style.display = "block";
+
+        toggleButton.addEventListener("click", function () {
+            if (description.classList.contains("expanded")) {
+                description.classList.remove("expanded");
+                toggleButton.innerText = "Xem thêm";
+            } else {
+                description.classList.add("expanded");
+                toggleButton.innerText = "Thu gọn";
+            }
+        });
+    }
+});
+
+    </script>
+    
+
+</body>
+</html>
+

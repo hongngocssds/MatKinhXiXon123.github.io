@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" href="cart.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN logo.png" alt="Logo" class="logo">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+                <a href="cart.html" class="btn btn-light ms-3">
+                    <i class="fa fa-shopping-cart"></i> <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+   <!-- Giỏ hàng -->
+<div class="container">
+    <div class="cart-container">
+        <h2 class="cart-title">Giỏ hàng của bạn</h2>
+        <div class="row">
+            <!-- Cột sản phẩm -->
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Hình ảnh</th>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng cộng</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Các sản phẩm sẽ được hiển thị ở đây -->
+                    </tbody>
+                </table>
+                <button class="btn btn-danger" onclick="clearCart()">Xóa tất cả</button>
+            </div>
+
+            <!-- Cột tóm tắt đơn hàng -->
+            <div class="col-md-4">
+                <div class="summary-box">
+                    <h4>Tóm tắt đơn hàng</h4>
+                    <p><strong>Tạm tính:</strong> <span id="subtotal">0đ</span></p>
+                    <p><strong>Tổng:</strong> <span id="total">0đ</span></p>
+                    <button class="btn btn-success" onclick="checkout()">Thanh toán ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartTable = document.getElementById("cart-items");
+            let subtotal = 0;
+            let cartCount = 0;
+            let totalPrice = 0;
+            cartTable.innerHTML = "";
+
+            cart.forEach((item, index) => {
+                let total = item.price * item.quantity;
+                subtotal += total;
+                cartCount += item.quantity;
+
+                cartTable.innerHTML += `
+                    <tr>
+                        <td><img src="${item.img}" width="50"></td>
+                        <td>${item.name}</td>
+                        <td>${formatPrice(item.price)}</td>
+                        <td>
+                            <input type="number" value="${item.quantity}" min="1" class="form-control"
+                            onchange="updateQuantity(${index}, this.value)">
+                        </td>
+                        <td>${formatPrice(total)}</td>
+                        <td><button class="btn btn-danger btn-sm" onclick="removeItem(${index})">X</button></td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById("subtotal").innerText = formatPrice(subtotal);
+            document.getElementById("total").innerText = formatPrice(subtotal);
+            updateCartCount();
+        }
+
+        function updateQuantity(index, newQuantity) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart[index].quantity = parseInt(newQuantity);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        function clearCart() {
+            if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?")) {
+                localStorage.removeItem("cart");
+                loadCart();
+            }
+        }
+
+        function checkout() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            if (cart.length === 0) {
+                alert("Giỏ hàng của bạn đang trống!");
+                return;
+            }
+
+            let totalPrice = document.getElementById("total").innerText;
+            localStorage.setItem("cartTotal", totalPrice);
+
+            window.location.href = "thanhtoan.html";
+        }
+
+        function formatPrice(price) {
+            return price.toLocaleString("vi-VN") + "đ";
+        }
+
+        document.addEventListener("DOMContentLoaded", loadCart);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+/* 🌟 Header (Giữ màu cũ) */
+.navbar {
+    background: linear-gradient(90deg, #d1f0ff, #89ceff); /* Gradient xanh nhạt hơn */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Giữ logo và menu cách nhau */
+}
+
+
+/* 🌟 Khung lớn chứa giỏ hàng */
+.cart-container {
+   
+    background: linear-gradient(90deg, #d1f0ff, #89ceff); /* Gradient xanh nhạt hơn */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 5px 20px rgba(0, 114, 255, 0.3);
+    color: #ffffff;
+    margin-top: 30px;
+}
+
+/* 📌 Hàng ngang: Hình ảnh, sản phẩm, giá,... */
+.cart-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #66d9ff, #3388ff); /* Gradient đẹp */
+    box-shadow: 0px 4px 15px rgba(0, 114, 255, 0.3);
+}
+
+/* 🏆 Ảnh sản phẩm */
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 15px solid #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-item img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 114, 255, 0.5);
+}
+
+/* 🎁 Tóm tắt đơn hàng */
+.summary-box {
+    background: linear-gradient(90deg, #66d9ff, #3388ff); /* Gradient sáng hơn */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 114, 255, 0.4);
+    text-align: center;
+    color: #ffffff;
+}
+
+.summary-box h4 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* ✅ Nút thanh toán */
+.btn-success {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background: linear-gradient(90deg, #0099cc, #0055aa);
+}
+
+/* ❌ Nút xóa */
+.btn-danger {
+    background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(90deg, #ff1a1a, #b30000);
+}
+
+/* ✨ Hiệu ứng chung */
+.btn:focus {
+    outline: none;
+}
+.navbar-brand img {
+    height: 90px; /* Tăng kích thước */
+    width: auto;
+    position: absolute;
+    top: -20px; /* Dịch lên trên */
+    left: 5%;
+    transform: translateX(-50%);
+}

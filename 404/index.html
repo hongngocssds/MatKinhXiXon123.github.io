@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Xí Xọn Shop</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="May Optical has been providing the GTA with quality and affordable eyewear since 1985.">
+    <link rel="canonical" href="/404/">
+
+    <link rel="shortcut icon" type="image/png" href="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/482239902_122110358942790552_5539804591698273971_n.jpg">
+
+    <!-- Custom CSS & Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link rel="stylesheet" href="/style.css ">
+
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--SLIDER-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+    <!-- Thư viện SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        /* 🌟 Làm sáng màu header */
+        .navbar-default { 
+            background: rgba(255, 255, 255, 0.1); /* Trong suốt nhẹ */
+    backdrop-filter: blur(15px); /* Hiệu ứng làm mờ */
+    -webkit-backdrop-filter: blur(15px); /* Hỗ trợ Safari */
+    border-radius: 40px; /* Bo tròn */
+    padding: 5px 15px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 90%;
+    margin: 20px auto; /* Canh giữa */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Viền mờ */
+    
+        }
+        
+
+        /* 🖼️ Căn chỉnh logo */
+        .navbar-brand img {
+            height: 90px; /* Tăng kích thước */
+    width: auto;
+    position: absolute;
+    top: -20px; /* Dịch lên trên */
+    left: 5%;
+    transform: translateX(-50%);
+           
+        }
+
+        .hidden-header {
+    transform: translateY(-200%);
+    transition: transform 0.6s ease-in-out;
+}
+
+        /* 🔹 Menu */
+        .navbar-nav > li > a {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #fff; /* Chữ trắng để nổi bật */
+            padding: 8px 12px; /* Giảm khoảng cách menu */
+            text-transform: uppercase;
+        }
+
+        /* 🛍️ Cart & Heart icon */
+   
+/* 📌 Căn chỉnh icon chung */
+.navbar-cart, .navbar-heart {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 🛒 Giỏ hàng - căn sát phải */
+.navbar-cart {
+    right: 30px;
+}
+
+/* ❤️ Trái tim - cách giỏ hàng 50px */
+.navbar-heart {
+    right: 70px; /* Điều chỉnh khoảng cách với giỏ hàng */
+}
+
+/* 🎯 Style cho icon */
+.navbar-cart a, .navbar-heart a {
+    font-size: 2.1rem;
+    font-weight: bold;
+    color: rgb(15, 10, 10);
+    text-decoration: none;
+}
+
+/* 🖤 Hiệu ứng hover */
+.navbar-cart a:hover, .navbar-heart a:hover {
+    color: #ff5733; /* Màu cam khi hover */
+}
+
+
+        
+
+        /* 📱 Responsive */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                text-align: center;
+            }
+            .navbar-right {
+                display: none;
+            }
+        }
+
+ /* 🎯 Popup quảng cáo */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    
+    padding: 10px; /* Giảm padding để không thừa nhiều khoảng trắng */
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    display: inline-block; /* Cho phép kích thước phù hợp với ảnh */
+}
+
+.popup-content img {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá khung */
+    height: auto; /* Giữ tỷ lệ ảnh */
+    display: block; /* Tránh bị ảnh hưởng bởi inline spacing */
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    
+    
+    padding: 1px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Popup quảng cáo -->
+    <div id="popupAd" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN STANDEE .png" alt="Quảng cáo" style="width: 300px; height: 500px;">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container header">
+            <div class="row" style="display: flex; align-items: center; justify-content: space-between;">
+                <!-- Logo on the left -->
+                <div class="navbar-header" style="padding-left: 30px; padding-right: 15px;">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top"style="display: flex; align-items: center;">
+                        <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN logo.png" alt="Logo">
+                    </a>
+                </div>
+                <!-- Menu aligned to the center -->
+            <div class="collapse navbar-collapse" id="navbar-collapse" style="flex: 2; display: flex; justify-content: center;">
+                <ul class="nav navbar-nav navbar-center" style="display: flex; align-items: center; font-weight: bold; margin-left: 20px;">
+                    <li><a class="page-scroll" href="/shop.html" style="color: black; padding: 15px 20px; font-size: 1.1rem;">CỬA HÀNG</a></li>
+                    <li><a class="page-scroll" href="#about-anchor" style="color: black; padding: 15px 20px; font-size: 1.1rem;">GIỚI THIỆU</a></li>
+                    <li><a class="page-scroll" href="#collection" style="color: black; padding: 15px 20px; font-size: 1.1rem;">BÁN CHẠY</a></li>
+                    <li><a class="page-scroll" href="#insurance-anchor" style="color: black; padding: 15px 20px; font-size: 1.1rem;">BẢO HÀNH</a></li>
+                    <li><a class="page-scroll" href="#services-anchor" style="color: black; padding: 15px 20px; font-size: 1.1rem;">DỊCH VỤ</a></li>
+                    <li><a class="page-scroll" href="#reviews-anchor" style="color: black; padding: 15px 20px; font-size: 1.1rem;">ĐÁNH GIÁ</a></li>
+                    <li><a class="page-scroll" href="#contact-anchor" style="color: black; padding: 15px 20px; font-size: 1.1rem;">LIÊN HỆ</a></li>
+                    <li><a class="page-scroll" href="blog.html" style="color: black; padding: 15px 20px; font-size: 1.1rem;">BLOG</a></li>
+
+                </ul>
+                </div>
+
+                <!-- Cart icon and Heart icon on the right -->
+               <!-- Giỏ hàng (Cart) -->
+<div class="navbar-cart">
+    <a href="/cart.html">
+        <i class="fa fa-shopping-cart"></i> 
+    </a>
+</div>
+
+<!-- Yêu thích (Heart) -->
+<div class="navbar-heart">
+    <a href="#" id="heart-icon">
+        <i class="fa fa-heart-o"></i>
+    </a>
+</div>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- JavaScript -->
+    <script>
+        // Hiển thị popup khi vào trang
+        window.onload = function () {
+            document.getElementById("popupAd").style.display = "flex";
+        };
+
+        // Đóng popup
+        function closePopup() {
+            document.getElementById("popupAd").style.display = "none";
+        }
+
+        // JavaScript for Heart Icon Toggle
+        document.getElementById("heart-icon").addEventListener("click", function(event) {
+            event.preventDefault();
+            let heartIcon = this.querySelector("i");
+            if (heartIcon.classList.contains("fa-heart-o")) {
+                heartIcon.classList.remove("fa-heart-o");
+                heartIcon.classList.add("fa-heart");
+                heartIcon.style.color = "red";
+            } else {
+                heartIcon.classList.remove("fa-heart");
+                heartIcon.classList.add("fa-heart-o");
+                heartIcon.style.color = "black";
+            }
+        });
+        let lastScrollTop = 0;
+const header = document.querySelector(".navbar");
+
+window.addEventListener("scroll", function () {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop) {
+        // Cuộn xuống -> Ẩn header
+        header.classList.add("hidden-header");
+    } else {
+        // Cuộn lên -> Hiện header
+        header.classList.remove("hidden-header");
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+    </script>
+
+</body>
+</html>
+ 
+    <!-- About Section -->
+<section id="about-anchor"></section>
+<section id="about" class="bgimage">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" style="border:none;">
+
+                    <div class="col-xs-5 col-format-text revealL mobile">
+                        <h2 class="section-heading heading ">GIỚI THIỆU VỀ XÍ XỌN</h2>
+
+                        <p class="paragraphs"> Xí Xọn được thành lập với sứ mệnh mang đến những sản phẩm kính mắt chất lượng và phong cách cho khách hàng. Từ những ngày đầu tiên, chúng tôi luôn không ngừng cải tiến để đáp ứng nhu cầu thị hiếu ngày càng đa dạng, giúp mọi người không chỉ nhìn rõ hơn mà còn thể hiện cá tính qua từng chiếc kính.
+
+Là một thương hiệu kính mắt thân thiện và tận tâm, Xí Xọn tự hào khi đồng hành cùng hàng nghìn khách hàng qua nhiều thế hệ. Với kinh nghiệm lâu năm trong ngành, chúng tôi cam kết mang đến những sản phẩm đạt chuẩn, xu hướng mới nhất và dịch vụ tận tình nhất.
+
+📍 Mua sắm ngay hôm nay để tìm kiếm mẫu kính phù hợp với bạn!
+                        </p>
+
+                    </div>
+
+                    <div class="col-xs-7 col-format-img revealR mobile">
+                        <img class="img-mobile" src="img/photos2/5.jpg" style="width: 100%; height: 100%;" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="row" style="border:none; ">
+
+                    <div class="col-xs-7 col-format-img revealL mobile">
+                        <img class="img-mobile" src="img/photos2/photos/20220504_MayOptical_website-1.jpg" style="width: 100%; height: 100%;" />
+                    </div>
+
+                    <div class="col-xs-5 col-format-text revealR mobile">
+
+                        <h2 class="section-heading heading">SỨ MÊNH CỦA CHÚNG TÔI</h2>
+                        <p class="paragraphs">
+                            Ưu tiên hàng đầu của Xí Xọn là mang đến những sản phẩm kính mắt chất lượng, phá vỡ quan niệm đeo kính cận thì không thời trang!
+                            <br>Chúng tôi luôn nỗ lực để đảm bảo bạn nhận được sự chăm sóc tốt nhất từ chúng tôi, từ khi bạn mua sản phẩm cho đến khi bạn đeo chúng hằng ngày.
+                           Đồng thời chúng tôi cũng mong muốn bạn thể hiện phong cách của bản thân qua từng chiếc kính.
+                           Sức khỏe và sự hài lòng của bạn chính là ưu tiên số 1 của chúng tôi. </p>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+    <!-- Bảng xếp hạng kính mắt -->
+<section id="collection" class="bgimage">
+    <link rel="stylesheet" href="css/COLECTION.CSS">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+               
+                
+
+               <!-- Bảng xếp hạng kính mắt -->
+<section id="collection" class="bgimage">
+    <link rel="stylesheet" href="css/COLECTION.CSS">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading heading">BÁN CHẠY NHẤT</h2>
+                
+                <!-- Swiper Slider -->
+                <div class="swiper-container">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <!-- Sản phẩm 1 -->
+                        <div class="swiper-slide product-card">
+                            <a href="product-detail.html?id=13">
+                                <div class="hot-sale">
+                                    <img src="img/fire.jpg" alt="Hot Sale">
+                                    HOT SALE
+                                </div>
+                                <div class="crown-icon gold-crown">👑</div>
+                                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL101.png" alt="Glasses 1">
+                                <p class="product-name">Gọng kính nhựa pha kim loại</p>
+                                <p class="product-price">1.350.000 đ</p>
+                            </a>
+                        </div>
+
+                        <!-- Sản phẩm 2 -->
+                        <div class="swiper-slide product-card">
+                            <a href="product-detail.html?id=14">
+                                <div class="hot-sale">
+                                    <img src="img/fire.jpg" alt="Hot Sale">
+                                    HOT SALE
+                                </div>
+                                <div class="crown-icon silver-crown">👑</div>
+                                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT101.png" alt="Glasses 2">
+                                <p class="product-name">Gọng kính nhựa pha kim loại càng TITAN</p>
+                                <p class="product-price">1.350.000 đ</p>
+                            </a>
+                        </div>
+
+                        <!-- Sản phẩm 3 -->
+                        <div class="swiper-slide product-card">
+                            <a href="product-detail.html?id=15">
+                                <div class="hot-sale">
+                                    <img src="img/fire.jpg" alt="Hot Sale">
+                                    HOT SALE
+                                </div>
+                                <div class="crown-icon bronze-crown">👑</div>
+                                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC101.png" alt="Glasses 3">
+                                <p class="product-name">Gọng TITAN xẻ cước cao cấp</p>
+                                <p class="product-price">1.350.000 đ</p>
+                            </a>
+                        </div>
+                         <div class="swiper-slide product-card">
+                            <a href="product-detail.html?id=13">
+                                <div class="hot-sale">
+                                    <img src="img/fire.jpg" alt="Hot Sale">
+                                    HOT SALE
+                                </div>
+                                <div class="crown-icon gold-crown">👑</div>
+                                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL101.png" alt="Glasses 1">
+                                <p class="product-name">Gọng kính nhựa pha kim loại</p>
+                                <p class="product-price">1.350.000 đ</p>
+                            </a>
+                        </div>
+
+                        <!-- Sản phẩm 2 -->
+                        <div class="swiper-slide product-card">
+                            <a href="product-detail.html?id=14">
+                                <div class="hot-sale">
+                                    <img src="img/fire.jpg" alt="Hot Sale">
+                                    HOT SALE
+                                </div>
+                                <div class="crown-icon silver-crown">👑</div>
+                                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT101.png" alt="Glasses 2">
+                                <p class="product-name">Gọng kính nhựa pha kim loại càng TITAN</p>
+                                <p class="product-price">1.350.000 đ</p>
+                            </a>
+                        </div>
+
+                        <!-- Sản phẩm 3 -->
+                        <div class="swiper-slide product-card">
+                            <a href="product-detail.html?id=15">
+                                <div class="hot-sale">
+                                    <img src="img/fire.jpg" alt="Hot Sale">
+                                    HOT SALE
+                                </div>
+                                <div class="crown-icon bronze-crown">👑</div>
+                                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC101.png" alt="Glasses 3">
+                                <p class="product-name">Gọng TITAN xẻ cước cao cấp</p>
+                                <p class="product-price">1.350.000 đ</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Nút điều hướng -->
+                 <!-- Nút điều hướng phải nằm ngoài swiper-wrapper -->
+                    <div class="swiper-button-next"></div>
+                     <div class="swiper-button-prev"></div>
+              </div>
+
+                <!-- Nút xem thêm -->
+                <div class="btn-container">
+                    <a href="shop.html" class="btn-xl">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+   
+    var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+        1024: { slidesPerView: 3 }, // Màn hình lớn: 3 sản phẩm
+        768: { slidesPerView: 2 },  // Máy tính bảng: 2 sản phẩm
+        480: { slidesPerView: 1 }   // Điện thoại: 1 sản phẩm
+    }
+});
+
+</script>
+
+</body>
+</html>
+ 
+    <!-- Insurance Section -->
+<section id="insurance-anchor"></section>
+<section id="insurance">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col-lg-12 ">
+                <div class="row" style="border:none; background:white; height:210px; ">
+
+                    <div class="col-xs-7 col-format-img revealL mobile insurance-img">
+                        <img src="img/photos2/11.jpg" style="width: 100%; height: 100%;" />
+                    </div>
+
+                    <div class="col-xs-5 col-format-text revealR mobile d-flex align-items-start">
+
+                        <h2 class="section-heading heading">CHÍNH SÁCH BẢO HÀNH</h2>
+                        <p class="paragraphs">
+                            Chúng tôi cam kết mang đến những sản phẩm mắt kính chất lượng cao, bền đẹp. Nếu có bất kỳ lỗi nào từ nhà sản xuất, bạn hoàn toàn có thể yên tâm với chính sách bảo hành của chúng tôi.
+                            <br>Ngoài ra, chúng tôi cũng chấp nhận MCSS, ODSP và OW.
+
+                            🔹 Các công ty bảo hiểm hỗ trợ:
+                            ✔️ Canada Life
+                            ✔️ Greenshield
+                            ✔️ Sunlife
+                            ✔️ Bluecross
+                            
+                            ❓ Không thấy nhà cung cấp bảo hiểm của bạn?
+                            📞 Hãy liên hệ với chúng tôi để kiểm tra ngay
+
+
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section> 
+    <!-- Services Section -->
+<section id="services-anchor"></section>
+<section id="services" class="bg-light-gray reveal" style="padding: 100px 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">DỊCH VỤ</h2>
+                <h3 class="section-subheading text-muted"> </h3>
+            </div>
+        </div>
+        <div class="row text-center services-mobile">
+            <div class="col-md-4 services-text">
+                <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-fourth"></i>
+                        <i class="fa fa-glasses fa-stack-1x fa-inverse"></i>
+                    </span>
+                <h4 class="service-heading">MẮT KÍNH</h4>
+                <p class="text-muted">Với hàng trăm mẫu kính có sẵn, chúng tôi chắc chắn sẽ có cặp kính hoàn hảo dành cho bạn! Bao gồm kính cận, kính râm, tròng kính, phụ kiện kính </p>
+            </div>
+            <div class="col-md-4 services-text">
+                <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-fourth"></i>
+                        <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                    </span>
+                <h4 class="service-heading">TRÒNG KÍNH</h4>
+                <p class="text-muted">Chúng tôi cung cấp tất cả các loại tròng kính lớn, đồng thời hỗ trợ đo mắt, hướng dẫn cách đeo, tháo và bảo quản kính áp tròng một cách an toàn.
+                </p>
+            </div>
+            <div class="col-md-4 services-text">
+                <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-fourth"></i>
+                        <i class="fa fa-screwdriver-wrench fa-stack-1x fa-inverse"></i>
+                    </span>
+                <h4 class="service-heading">CHĂM SÓC</h4>
+                <p class="text-muted">Để phục vụ bạn tốt hơn, chúng tôi còn cung cấp dịch vụ điều chỉnh kính, sửa chữa và các tùy chỉnh đặc biệt như lắp đệm mũi, phủ màu tròng kính và làm kính kẹp tùy chỉnh.</p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" style="border:none; ">
+
+                    <div class="col-xs-4 revealL">
+                        <img src="img/photos2/glasses2.jpg" style="width: 100%; height: 50%;" />
+                    </div>
+
+                    <div class="col-xs-4 reveal">
+                        <img src="img/photos2/contacts.jpg" style="width: 100%; height: 100%;" />
+                    </div>
+
+                    <div class="col-xs-4 revealR">
+                        <img src="img/photos2/dog.jpg" style="width: 100%; height: 100%;" />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section> 
+     
+    <!-- Review Section -->
+<section id="reviews-anchor"></section>
+<section id="reviews" class="bg-light-gray reveal" style="padding: 50px 100px 100px ;margin-top: -50px;"></section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">ĐÁNH GIÁ TỪ KHÁCH HÀNG</h2>
+               
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <script src="https://static.elfsight.com/platform/platform.js" async></script>
+                <div class="elfsight-app-b0ffea90-ef70-4994-9944-0e860fc428a6" data-elfsight-app-lazy></div>
+            </div>
+        </div>
+    </div>
+</section> 
+    <section id="contact-anchor"></section>
+<section id="contact">
+    <div class="container reveal">
+
+        <div class="row">
+            <div class="col-lg-12 text-center ">
+                <h2 class="section-heading">LIÊN HỆ VỚI XÍ XỌN</h2>
+                <h3 class="section-subheading text-muted"></h3>
+            </div>
+        </div>
+
+        <div class="row " style="color: white;">
+            <div class="col-lg-6 text-center" style="padding-bottom: 50px;">
+                <div class="text-white"><b>Phone:</b> <br><a href="tel:+84 000-1900-6569"> (000) 1900-6569</a><br></div>
+            </div>
+            <div class="col-lg-6 text-center" style="padding-bottom: 50px;">
+                <div style="color: white;"><b>Email:</b> <br><a href="mailto:matkinhxixon@gmai.com"><span
+                            class="__cf_email__"
+                            data-cfemail="771f121b1b18371a160e1807031e14161b5914181a">matkinhxixon@gmail.com</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <section id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d15672.207190780231!2d106.670252!3d10.883665000000002!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDUzJzAxLjIiTiAxMDbCsDQwJzEyLjkiRQ!5e0!3m2!1svi!2sus!4v1742099208587!5m2!1svi!2sus" width="800" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+        </div>
+
+        <div class="row text-center" style="color: white; ">
+
+            <div class="col-lg-6 text-center" style="padding-top: 50px;"><b>Địa Chỉ:</b> <br>Đường Thạnh Xuân, Phường Thạnh Xuân, Quận 12, Hồ Chí Minh
+            </div>
+
+        </div>
+
+    </div>
+</section> 
+    <!-- jQuery Version 1.11.0 -->
+<script src="js/jquery-1.11.0.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js "></script>
+
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js "></script>
+<script src="js/classie.js "></script>
+<script src="js/cbpAnimatedHeader.js "></script>
+
+<!-- Contact Form JavaScript -->
+<script src="js/jqBootstrapValidation.js "></script>
+<script src="js/contact_me.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src=" js/agency.js "></script>
+
+<!--My JS-->
+<script src=" js/kalvin.js "></script>
+    
+
+</body>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; XÍ XỌN SHOP 2025</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    
+    <li>
+        <a href="https://www.facebook.com/profile.php?id=61573716576466" target="_blank">
+            
+            
+                <i class="fa-brands fa-facebook"></i>
+              <!-- ✅ Đã sửa lại -->
+        </a>
+    </li>
+
+    <li>
+        <a href="https://www.instagram.com/_matkinhxixon_/" target="_blank">
+            
+            
+                <i class="fa-brands fa-instagram"></i>
+              <!-- ✅ Đã sửa lại -->
+        </a>
+    </li>
+
+    <li>
+        <a href="https://www.tiktok.com/@matkinhxixon" target="_blank">
+            
+            
+                <i class="fa-brands fa-tiktok"></i>
+              <!-- ✅ Đã sửa lại -->
+        </a>
+    </li>
+
+    <li>
+        <a href="https://shopee.vn/kinhmatxixon" target="_blank">
+            
+            
+                <i class="fa-solid fa-store"></i> 
+              <!-- ✅ Đã sửa lại -->
+        </a>
+    </li>
+
+
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="" target="_blank" style="color: black;">Chính Sách Hoàn Trả</a></li>
+                    <li><a href="" target="_blank" style="color: black;">Điều Khoản Dịch Vụ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+</html>

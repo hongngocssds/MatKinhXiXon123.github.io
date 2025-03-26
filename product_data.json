@@ -1,0 +1,112 @@
+[
+  {
+  "id": 1,
+  "ten_san_pham": "Tròng kính Bevis Optical chiết suất 1.56",
+  "gia": 200000,
+  "mo_ta": "Tròng kính Bevis Optical chiết suất 1.56 là một sản phẩm chất lượng cao, được thiết kế để mang lại sự cân bằng hoàn hảo giữa độ mỏng nhẹ và độ bền.",
+  "dac_diem": [
+  "Chiết suất 1.56 giúp kính mỏng nhẹ",
+  "Chống chói, chống trầy xước",
+  "Chống bám bẩn, chống tia UV",
+  "Chống bám nước và dầu"
+  ],
+  "ung_dung": "Thích hợp cho người dùng hàng ngày, làm việc với màn hình máy tính, lái xe ban đêm.",
+  "img": "bevis_optical.jpg"
+  },
+  {
+  "id": 2,
+  "ten_san_pham": "Gọng kính kim loại",
+  "gia": 299000,
+  "mo_ta": "Gọng kính kim loại thời trang, bền bỉ, mang lại sự sang trọng và phong cách hiện đại.",
+  "dac_diem": [
+  "Thiết kế mỏng nhẹ, chắc chắn",
+  "Phù hợp với nhiều kiểu dáng khuôn mặt"
+  ],
+  "img": "gong_kinh_kim_loai.jpg"
+  },
+  {
+  "id": 3,
+  "ten_san_pham": "Kính râm",
+  "gia": 499000,
+  "img": "kinh_ram.jpg"
+  },
+  {
+  "id": 4,
+  "ten_san_pham": "Gọng kính Titan kim loại cao cấp",
+  "gia": 1099000,
+  "mo_ta": "Gọng kính Titan cao cấp với thiết kế hiện đại, thanh lịch.",
+  "chat_lieu": {
+  "giong_kinh": "Titan kim loại cao cấp",
+  "cang_kinh": "Kim loại chắc chắn"
+  },
+  "kich_thuoc": {
+  "chieu_rong_trong_kinh": "51mm",
+  "cau_kinh": "18mm",
+  "chieu_dai_cang_kinh": "142mm"
+  },
+  "dac_diem": [
+  "Chất liệu titan nhẹ, bền",
+  "Thiết kế thanh lịch, chống gỉ sét"
+  ],
+  "img": "gong_kinh_titan.jpg"
+  },
+  {
+  "id": 5,
+  "ten_san_pham": "Gọng kính nhựa dẻo",
+  "gia": 199000,
+  "mo_ta": "Gọng kính nhẹ nhàng, thiết kế tinh tế, phù hợp với người dùng yêu thích sự thoải mái.",
+  "chat_lieu": {
+  "giong_kinh": "Nhựa dẻo cao cấp",
+  "cang_kinh": "Linh hoạt, dễ điều chỉnh"
+  },
+  "kich_thuoc": {
+  "chieu_rong_trong_kinh": "52mm",
+  "cau_kinh": "16mm",
+  "chieu_dai_cang_kinh": "142mm"
+  },
+  "img": "gong_kinh_nhua_deo.jpg"
+  },
+  {
+  "id": 6,
+  "ten_san_pham": "Dung dịch vệ sinh kính mắt Shiny 100ml",
+  "gia": 10000,
+  "img": "dung_dich_ve_sinh.jpg"
+  },
+  {
+  "id": 7,
+  "ten_san_pham": "Kính áp tròng cận thị trong suốt Cosmo",
+  "gia": 229000,
+  "mo_ta": "Lens Cosmo nhập khẩu từ Hàn Quốc, thân thiện với giác mạc.",
+  "thong_so_ky_thuat": {
+  "duong_kinh": "14.0mm",
+  "do_can": "0 đến 15 độ",
+  "ban_kinh_cong": "8.6 đến 8.8mm",
+  "do_am": "58%",
+  "hsd": "3 đến 6 tháng"
+  },
+  "img": "kinh_ap_trong_cosmo.jpg"
+  },
+  {
+  "id": 8,
+  "ten_san_pham": "Khay đựng kính áp tròng",
+  "gia": 35000,
+  "img": "khay_kinh_ap_trong.jpg"
+  },
+  {
+  "id": 9,
+  "ten_san_pham": "Gọng kính cao cấp Molsion",
+  "gia": 2099000,
+  "xuat_xu": "Trung Quốc",
+  "kieu_dang": "Mắt mèo",
+  "chat_lieu": "TR/Titanium",
+  "mau_giong": "Vàng Hồng Viền Nhựa Xám Trong Suốt",
+  "img": "gong_kinh_molsion.jpg"
+  },
+  {
+  "id": 10,
+  "ten_san_pham": "Hộp đựng mắt kính",
+  "gia": 55000,
+  "img": "hop_dung_mat_kinh.jpg"
+  }
+  ]
+  

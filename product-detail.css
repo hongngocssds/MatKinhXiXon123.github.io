@@ -1,0 +1,328 @@
+/* Cấu hình chung */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Thanh điều hướng */
+nav {
+    background-color: black;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00d9ff;
+}
+
+/* Bố cục trang sản phẩm */
+.product-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    padding: 50px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Ảnh sản phẩm */
+.product-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#product-image {
+    width: 580px;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 4px linear-gradient(90deg, #d1f0ff, #89ceff);;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    /* Dịch ảnh sản phẩm sang trái */
+
+    margin-left: -20px; /* Điều chỉnh giá trị này tùy theo mong muốn */
+    transform: translateX(-10px);
+}
+
+
+
+#product-image:hover {
+    transform: scale(1.08);
+}
+
+/* Ảnh phụ */
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.1);
+    border: 2px solid #00d9ff;
+}
+
+.thumbnail.active {
+    border: 3px solid #00d9ff;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+}
+
+/* Thông tin sản phẩm */
+.product-info {
+    max-width: 400px;
+}
+
+/* Tiêu đề sản phẩm */
+#product-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Giá sản phẩm */
+#product-price {
+    font-size: 30px;
+    color: #0a0909;
+    font-weight: bold;
+}
+
+/* Mô tả sản phẩm */
+#product-description {
+    font-size: 16px;
+    line-height: 1.8; /* Giãn dòng giúp dễ đọc hơn */
+    color: #222; /* Màu chữ đậm hơn một chút */
+    font-family: 'Poppins', sans-serif; /* Font chữ đẹp và thanh lịch */
+    text-align: justify; /* Căn đều hai bên */
+    padding: 20px; /* Tạo khoảng cách bên trong */
+    margin-top: 20px; /* Đẩy xuống dưới một chút để tách biệt */
+    
+    background: #F5F5F5; /* Màu nền trắng xám nhạt */
+    border-radius: 8px; /* Bo góc mềm mại */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+    
+    border-top: 1px solid #ddd; /* Gạch ngang nhẹ phía trên */
+    font-weight: bold; /* Làm đậm nội dung */
+    max-height: 350px; /* Giới hạn chiều cao */
+    overflow: hidden; /* Ẩn nội dung vượt quá */
+    position: relative; /* Giúp căn chỉnh nút "Xem thêm" */
+}
+/* Tạo hiệu ứng mờ ở cuối để báo hiệu có nội dung bị ẩn */
+#product-description.expanded {
+    max-height: none; /* Khi mở rộng, không giới hạn chiều cao */
+}
+
+/* Nút Xem thêm / Thu gọn */
+#toggle-button {
+    display: none; /* Mặc định ẩn */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 2px 4px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 8px;
+}
+
+#toggle-button:hover {
+    background: #0056b3;
+}
+
+/* Chọn số lượng */
+.quantity-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#quantity {
+    width: 60px;
+    font-size: 18px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+/* Nút thêm vào giỏ */
+.btn-primary {
+    font-size: 18px;
+    padding: 12px 24px;
+    background: linear-gradient(to right, #007bff, #00d9ff);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #0056b3, #00b3cc);
+}
+
+/* Hiển thị tổng tiền */
+#total-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .product-detail-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+
+    #product-image {
+        max-width: 100%;
+    }
+}
+nav {
+    background: linear-gradient(90deg, #d1f0ff, #89ceff); /* Gradient xanh nhạt hơn */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Giữ logo và menu cách nhau */
+}
+;
+
+.image-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+
+.lens {
+    position: absolute; /* Để lens di chuyển theo ảnh */
+    width: 150px;
+    height: 150px;
+    border: 2px solid white;
+    background-repeat: no-repeat;
+    background-size: 450px 450px;
+    pointer-events: none;
+    display: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: translate(-26%, -26%);
+}
+#zoom-result {
+    width: 450px;
+    height: 450px;
+    border: 2px solid #ddd;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 700px;
+    background-repeat: no-repeat;
+    background-size: 450px 450px;
+    z-index: 10;
+    
+}
+.image-container {
+    position: relative; /* Để lens hiển thị đúng trong container */
+}
+
+
+
+
+/* Giá sản phẩm */
+#product-price {
+    font-size: 30px;
+    color: #00c6ff;
+    font-weight: bold;
+    margin-bottom: 10px; /* Tạo khoảng cách với phần chọn màu */
+}
+
+/* Chọn màu sắc */
+.color-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Tùy chỉnh vòng tròn chọn màu */
+.color-option {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Khi được chọn */
+.color-option.selected {
+    border: 2px solid #00c6ff;
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.6);
+}
+.color-options {
+    justify-content: flex-start;
+}
+.navbar-brand img {
+    height: 90px; /* Tăng kích thước */
+    width: auto;
+    position: absolute;
+    top: -20px; /* Dịch lên trên */
+    left: 5%;
+    transform: translateX(-50%);
+}
+.description-img {
+    width: 70%;
+    max-width: 450px;
+    height: 80%;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+}

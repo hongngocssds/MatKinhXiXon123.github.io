@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kính Mắt Xí Xọn</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Hiệu ứng popup filter */
+        #filter-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            width: 300px;
+        }
+        #filter-popup.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN logo.png" alt="Logo" class="logo" >
+            </a>
+            
+            <!-- Thanh tìm kiếm -->
+            <form class="d-flex ms-auto">
+                <input class="form-control me-2" type="search" id="search-input" placeholder="Tìm kiếm..." aria-label="Search">
+                <button class="btn btn-light" type="button" onclick="searchProducts()"><i class="fa fa-search"></i></button>
+            </form>
+
+            <!-- Nút Filter -->
+            <button class="btn btn-light ms-3" id="filter-button">
+                <i class="fa fa-filter"></i>
+            </button>
+
+            <!-- Giỏ hàng -->
+            <a href="cart.html" class="btn btn-light ms-3">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+        </div>
+    </nav>
+    <div class="floating-buttons">
+        
+        </a>
+        <a href="https://m.me/600165166510142" class="floating-btn messenger" target="_blank">
+            <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/—Pngtree—messenger logo icon_3595693.png" alt="Messenger">
+        </a>
+        
+       
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Popup bộ lọc -->
+    <div id="filter-popup">
+        <h5>Bộ lọc</h5>
+        <h6>Danh mục</h6>
+        <ul class="list-group">
+            <li class="list-group-item"><input type="checkbox" class="category-filter" value="phụ kiện"> Phụ kiện kính</li>
+            <li class="list-group-item"><input type="checkbox" class="category-filter" value="Kính râm">Kính râm</li> 
+            <li class="list-group-item"><input type="checkbox" class="category-filter" value="tròng kính"> Tròng kính</li>
+            <li class="list-group-item">
+                <input type="checkbox" class="category-filter" value="gọng kính"> Gọng kính
+            </li>
+                <ul class="sub-category">
+                    <li><input type="checkbox" class="category-filter" value="kim loại"> Kim loại</li>
+                    <li><input type="checkbox" class="category-filter" value="nhựa cứng"> Nhựa cứng</li>
+                    <li><input type="checkbox" class="category-filter" value="nhựa"> Nhựa</li>
+                    <li><input type="checkbox" class="category-filter" value="Acetate">Acetate</li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <h6 class="mt-3">Sắp xếp</h6>
+        <select id="sort-options" class="form-select">
+            <option value="default">Mặc định</option>
+            <option value="price-low-high">Giá: Thấp - Cao</option>
+            <option value="price-high-low">Giá: Cao - Thấp</option>
+            <option value="name-asc">Tên: A-Z</option>
+            <option value="name-desc">Tên: Z-A</option>
+        </select>
+
+        <button class="btn btn-primary mt-3" id="apply-filter">Áp dụng</button>
+        <button class="btn btn-secondary mt-3" id="close-filter">Đóng</button>
+    </div>
+
+    <!-- Nội dung sản phẩm -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row row-cols-4" id="product-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            let products = [
+            {
+        id: 1, 
+        name: "Kính râm thời trang", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR101.png", 
+        category: "Kính râm",
+        colors: [
+            { name: "Đen", hex: "#9a7669", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR101.png" },
+            { name: "Xanh", hex: "#1b1d1a", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR102.png" }
+         
+        ]
+    },
+    {
+        id: 2, 
+        name: "Gọng kính nhựa dẻo mắt mèo", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD201.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        colors: [
+            { name: "Trắng", hex: "#8c8e89", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD201.png" },
+            { name: "Hồng", hex: "#141312", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD202.png" }
+        ]
+    },
+    {
+        id: 3, 
+        name: "Gọng kính nhựa dẻo tròn", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD301.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        colors: [
+            { name: "Nâu", hex: "#131312", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD301.png" },
+            { name: "Ghi", hex: "#c5b4aa", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD302.png" },
+            { name: "Ghi", hex: "#ebe0df", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD303.png" },
+        ]
+    },
+    {
+        id: 4, 
+        name: "Gọng kính nhựa dẻo BROWNLINE", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD401.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        colors: [
+            { name: "Nâu", hex: "#e5e4e4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD401.png" },
+            { name: "Đen", hex: "#151515", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD402.png" },
+        ]
+        },
+        {
+        id: 5, 
+        name: "Gọng kính nhựa dẻo dáng vuông", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD501.png", 
+        category: "gọng kính",
+        subcategory: "nhựa",
+        colors: [
+            { name: "Xanh biển", hex: "#434345", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD501.png" },
+            { name: "Đen", hex: "#0a0b0a", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/GD502.png" }
+        ]
+    },
+    {
+        id: 6, 
+        name: "Kính râm phân cực", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR201.png", 
+        category: "Kính râm",
+        colors: [
+            { name: "Tím", hex: "#800080", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR201.png" },
+            { name: "Xám", hex: "#696969", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR202.png" }
+        ]
+    },
+    {
+        id: 7, 
+        name: "Kính râm mèo", 
+        price: "240000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR301.png", 
+        category: "Kính râm",
+        colors: [
+            { name: "Tím", hex: "#800080", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR301.png" },
+            { name: "Xám", hex: "#696969", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/SẢN PHẨM bóoung/KR302.png" }
+        ]
+    },
+    {
+        id: 8, 
+        name: "Gọng kính mắt mèo nhựa cứng", 
+        price: "360000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC101.png", 
+        category: "gọng kính",
+        subcategory: "nhựa cứng",
+        colors: [
+            { name: "Trắng", hex: "#dbdbd7", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC101.png" },
+            { name: "Đen", hex: "#624b44", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC102.png" }
+        ]
+    },
+    {
+        id: 9, 
+        name: "Gọng kính nhựa cứng kim loại cao cấp", 
+        price: "700000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC201.png", 
+        category: "gọng kính",
+        subcategory: "nhựa cứng",
+        colors: [
+            { name: "Vàng", hex: "#10110e", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC201.png" },
+            { name: "Xanh lá", hex: "#2e2923", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NC202.png" }
+        ]
+    },
+    {
+        id: 10, 
+        name: "Gọng kính nhựa ACETATE cao cấp", 
+        price: "800000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA101.png", 
+        category: "gọng kính",
+        subcategory: "Acetate",
+        colors: [
+            { name: "Vàng", hex: "#9198a2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA101.png" }
+            
+        ]
+    },
+    {
+        id: 11, 
+        name: "Gọng kính nhựa ACETATE", 
+        price: "720000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA201.png", 
+        category: "gọng kính",
+        subcategory: "Acetate",
+        colors: [
+            { name: "Vàng", hex: "#3d4246", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA201.png" },
+            { name: "Vàng", hex: "#13171a", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NA202.png" }
+            
+        ]
+    },
+    {
+        id: 12, 
+        name: "Gọng kính hợp kim TITAN", 
+        price: "840000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/KLTT101.png", 
+        category: "gọng kính",
+        subcategory: "kim loại",
+        colors: [
+            { name: "Bạc", hex: "#e5e3e2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/KLTT101.png" },
+            { name: "Đồng", hex: "#947f66", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/KLTT1022.png" }
+        ]
+    },
+    
+    {
+        id: 13,
+        name: "Gọng kính nhựa pha kim loại",
+        price: "1350000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        colors: [
+            { name: "Đen", hex: "#0f0f0f", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL101.png" },
+            {name: "Nâu", hex: "#a58e7a", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL102.png" }
+        ]
+    },
+    {
+        id: 14,
+        name: "Gọng kính nhựa pha kim loại càng TITAN",
+        price: "1350000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        colors: [
+            { name: "Bạc", hex: "#0d0a09", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT101.png" },
+            { name: "Vàng", hex: "#885941", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL102.png" }
+        ]
+    },
+    {
+        id: 15,
+        name: "Gọng TITAN xẻ cước cao cấp",
+        price: "980000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        colors: [
+            { name: "Đen", hex: "#bdb7b4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC101.png" },
+            { name: "Bạc", hex: "#cc9392", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TTXC102.png" }
+        ]
+    },
+    {
+        id: 16,
+        name: "Gọng kim loại TITAN cao cấp",
+        price: "1375000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TT101.png",
+        category: "gọng kính",
+        subcategory: "kim loại",
+        colors: [
+            { name: "Vàng", hex: "#dda5a3", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TT101.png" },
+            { name: "Bạc", hex: "#af9e8f", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/TT102.png" }
+        ]
+    },
+    {
+        id: 17,
+        name: "Hộp đựng kính da PU cao cấp",
+        price: "50000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK100.png",
+        category: "phụ kiện",
+        colors: [
+            { name: "Đen", hex: "#82b4d5", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK100.png" },
+           
+        ]
+    },
+    {
+        id: 18,
+        name: "Khăn lau kính vải sợi tằm",
+        price: "8000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK200.png",
+        category: "phụ kiện",
+        colors: [
+            { name: "Trắng", hex: "#b2bfcf", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK200.png" }
+        ]
+    },
+    {
+        id: 19,
+        name: "Dung dịch vệ sinh kính 100ml",
+        price: "14000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PKDD4.png",
+        category: "phụ kiện",
+        colors: [
+            { name: "Xanh", hex: "#012a5b", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PKDD4.png" }
+           
+        ]
+    },
+    {
+        id: 20,
+        name: "Túi vải đựng chống xước",
+        price: "20000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK300.png",
+        category: "phụ kiện",
+        colors: [
+            { name: "Đen", hex: "#e5e2da", img: "NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK300.png" }
+        ]
+    },
+    {
+        id: 21,
+        name: "Dây đeo kính thời trang chống rơi",
+        price: "70000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK501.png",
+        category: "phụ kiện",
+        colors: [
+            { name: "Đỏ", hex: "#d9d3d0", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK501.png" },
+            { name: "Xanh dương", hex: "#f6f5ef", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK502.png" },
+            { name: "Xanh dương", hex: "#cac6ca", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK503.png" }
+            
+        ]
+    },
+    {
+        id: 22,
+        name: "Đệm tai chống trượt",
+        price: "8000",
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK600.png",
+        category: "phụ kiện",
+        colors: [
+            { name: "Đen", hex: "#d7e8f4", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/PK600.png" }
+        ]
+    }
+,
+
+    {
+        id: 23, 
+        name: "Chemi Crystal U1 Coated 1.56 SP", 
+        price: "225000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM56U1.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#15a64b", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM56U1.png" }
+        ]
+    },
+
+    {
+        id: 24, 
+        name: "Chemi Crystal U1 Coated 1.60 SP", 
+        price: "325000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM60U1.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#f18f5e", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM60U1.png" }
+        ]
+    },
+    {
+        id: 25, 
+        name: "Chemi Crystal U1 Coated 1.67 ASP", 
+        price: "510000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM67U1.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#b674b2", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CM67U1.png" }
+        ]
+    },
+    {
+        id: 26, 
+        name: "Chemi Perfect UV Crystal 1.67 UV Coated", 
+        price: "990000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "#f2d60b", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png" }
+        ]
+    },
+    {
+        id: 27, 
+        name: "Chemi Sun Guard U2 Coated 1.60 ASP", 
+        price: "1020000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png", 
+        category: "tròng kính",
+        colors: [
+            { name: "Trong suốt", hex: "##f3daa5", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/CMUV67U6.png" }
+        ]
+    },
+    {
+        id: 28, 
+        name: "Gọng kính nhựa pha kim loại càng TITAN", 
+        price: "1350000", 
+        img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT201.png", 
+        category: "gọng kính",
+        subcategory: "kim loại",
+        colors: [
+            { name: "Vàng", hex: "#23201d", img: "img/san pham/NHẬN DIỆN THƯƠNG HIỆU/SẢN PHẨM/NPKL0CTT201.png" },
+
+        ]
+    }
+];
+
+    
+function parsePrice(price) {
+    return parseInt(price.replace(/\D/g, ""), 10);
+}
+
+function renderProducts(filteredProducts = products) {
+    let productList = document.getElementById("product-list");
+    productList.innerHTML = "";
+    filteredProducts.forEach(product => {
+        let formattedPrice = parsePrice(product.price).toLocaleString("vi-VN"); // Định dạng giá tiền
+
+productList.innerHTML += `
+
+    <div class="col product-card" data-category="${product.category}">
+        <div class="card">
+            <img src="${product.img}" class="card-img-top" alt="${product.name}">
+            <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text price">${formattedPrice}đ</p>
+                <a href="${product.category.trim().toLowerCase() === 'Tròng kính' ? 'product-detail.html' : 'product-detail.html?id=' + product.id}" 
+                   class="btn ${product.category.trim().toLowerCase() === 'tròng kính' ? 'btn-danger' : 'btn-primary'}">
+                   ${product.category.trim().toLowerCase() === 'tròng kính' ? 'Liên hệ' : 'Mua ngay ➜'}
+                </a>
+            </div>
+        </div>
+    </div>
+`;
+
+    });
+}
+function removeVietnameseTones(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D");
+}
+
+function searchProducts() {
+    let searchInput = removeVietnameseTones(document.getElementById("search-input").value.toLowerCase());
+
+    let filteredProducts = products.filter(product => 
+        removeVietnameseTones(product.name.toLowerCase()).includes(searchInput)
+    );
+
+    if (filteredProducts.length === 0) {
+        document.getElementById("product-list").innerHTML = `<div class="col-12 text-center"><p>Không tìm thấy sản phẩm nào.</p></div>`;
+    } else {
+        renderProducts(filteredProducts);
+    }
+
+    if (searchInput === "") {
+        renderProducts(products);
+    }
+}
+
+document.getElementById("search-input").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Ngăn không cho form bị submit
+
+        searchProducts();
+    }
+});
+
+document.querySelector(".btn-light[type='button']").addEventListener("click", searchProducts);
+
+
+
+
+
+            function filterProducts() {
+                let selectedCategories = [...document.querySelectorAll(".category-filter:checked")].map(cb => cb.value);
+                let filteredProducts = products.filter(product => 
+                selectedCategories.length === 0 || 
+        selectedCategories.includes(product.category) ||
+        (product.subcategory && selectedCategories.includes(product.subcategory))
+    );
+
+                let sortOption = document.getElementById("sort-options").value;
+                if (sortOption === "price-low-high") filteredProducts.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+                if (sortOption === "price-high-low") filteredProducts.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
+                if (sortOption === "name-asc") filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                if (sortOption === "name-desc") filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+
+                renderProducts(filteredProducts);
+            }
+
+            document.getElementById("filter-button").addEventListener("click", () => {
+                document.getElementById("filter-popup").classList.add("active");
+                document.getElementById("overlay").classList.add("active");
+            });
+
+            document.getElementById("close-filter").addEventListener("click", () => {
+                document.getElementById("filter-popup").classList.remove("active");
+                document.getElementById("overlay").classList.remove("active");
+            });
+
+            document.getElementById("apply-filter").addEventListener("click", () => {
+                filterProducts();
+                document.getElementById("filter-popup").classList.remove("active");
+                document.getElementById("overlay").classList.remove("active");
+            });
+
+            renderProducts();
+        });
+        document.addEventListener("scroll", function () {
+    let buttons = document.querySelector(".floating-buttons");
+    if (window.scrollY > 200) {
+        buttons.style.opacity = "1";
+        buttons.style.visibility = "visible";
+    } else {
+        buttons.style.opacity = "0";
+        buttons.style.visibility = "hidden";
+    }
+});
+
+
+    </script>
+</body>
+</html>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>AI Chat Assistant</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="chatbot.css">
+ </head>
+ <body>
+ 
+     <section class="chat-window">
+         <button class="close">x close</button>
+         <div class="chat">
+             <div class="model">
+                 <p>Xin chào, Xí Xọn có thể giúp gì cho bạn?</p>
+             </div>
+             
+         </div>
+         <div class="input-area">
+             <input placeholder="Ask me anything..." type="text">
+             <button>
+                 <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/send-icon.png" alt="send">
+             </button>
+         </div>
+     </section>
+ 
+     <div class="chat-button">
+         <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN CHATBOT AVA.png" alt="start chat">
+     </div>
+ 
+     <script type="importmap">
+         {
+           "imports": {
+             "@google/generative-ai": "https://esm.run/@google/generative-ai"
+           }
+         }
+     </script>
+     
+     <script type="module" src="js/chatbot.js"></script>
+     
+ </body>
+ </html>

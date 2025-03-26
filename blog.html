@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Playfair+Display:wght@400;600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+
+    </head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Thời Trang & Kính Mắt</title>
+    <style>
+        /* 🌿 Cấu hình chung  TEXT */ 
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #000609;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 🔹 Ảnh nền + Màu nền hòa trộn */
+        .hero {
+    position: relative;
+    height: 700px;
+    background: linear-gradient(to bottom, rgba(236, 234, 231, 0.5), rgba(91, 201, 229, 0.11)), 
+                url("img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN STANDEE  (6000 x 4000 px).png") center no-repeat;
+    background-size: contain; /* Hiển thị toàn bộ ảnh mà không bị cắt */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+        /* 🔥 Hiệu ứng overlay giúp chữ rõ hơn */
+        .hero .overlay {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 🔹 Header trong suốt, mờ, bo tròn */
+        .navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center; /* Căn giữa nội dung */
+    align-items: center;
+    gap: 50px; /* Tạo khoảng cách giữa các phần */
+    padding: 15px 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.logo img {
+    height: 80px; /* Điều chỉnh kích thước logo */
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Căn giữa menu */
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #333;
+    transition: 0.3s;
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.nav-menu a:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.icons {
+    display: flex;
+    justify-content: center; /* Căn giữa icon */
+    gap: 20px;
+    align-items: center;
+}
+
+.icons a {
+    font-size: 18px;
+    color: #333;
+    transition: 0.3s;
+}
+
+.icons a:hover {
+    color: #ff5733;
+}
+
+        
+        /* 📄 Nội dung bài viết (cách xa ảnh nền) */
+        .content {
+            max-width: 800px;
+            margin: 50px auto ;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+   
+        /* 📱 Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hero {
+                height: 300px;
+            }
+        }
+        .footer {
+    background: linear-gradient(90deg, #a1dae2, #97dae3);
+    color: white;
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+    margin-bottom: -80px; /* Dịch logo lên trên */
+
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: -60px; /* Dịch logo lên trên */
+}
+
+.footer-logo {
+    flex: 1;
+    text-align: center;
+    margin: -40px 0 40px ;
+
+    
+}
+
+.footer-logo img {
+    width: 200px;
+
+    margin-bottom: -50px; /* Dịch logo lên trên */
+}
+
+
+.subscribe-box {
+    display: flex;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.subscribe-box input {
+    border: none;
+    background: transparent;
+    padding: 10px;
+    flex: 1;
+    outline: none;
+}
+
+.subscribe-box button {
+    background: #ff8c42;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 60px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.footer-links, .footer-contact, .footer-policy {
+    flex: 1;
+    text-align: left;
+}
+
+.footer-links h4, .footer-contact h4, .footer-policy h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-links ul, .footer-policy ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li, .footer-policy ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a, .footer-policy ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover, .footer-policy ul li a:hover {
+    text-decoration: underline;
+}
+
+.certifications {
+    margin-top: 10px;
+}
+
+.certifications img {
+    width: 200px;
+    margin-right: 10px;
+    height: 180px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 10px;
+}
+
+    </style>
+    
+</head>
+<body>
+
+    <!-- 🌟 Header -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN logo.png" alt="Logo Thương Hiệu">
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="/index.html" >Trang Chủ</a></li>
+                <li><a href="/shop.html">Sản Phẩm</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#footer" class="contact-button">Liên hệ</a></li>
+                   
+            </ul>
+        </nav>
+         <div class="icons">
+        <a href="#"><i class="fas fa-heart"></i></a>  
+        <a href="/cart.html"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+    </header>
+
+    <!-- 🔥 Hero Section -->
+    <section class="hero">
+      
+           
+       
+    </section>
+
+    <!-- 📄 Nội dung bài viết -->
+    <section class="content">
+        <h2>TOP 5 MẪU GỌNG KÍNH THỜI TRANG ĐƯỢC ƯA CHUỘNG NHẤT 2025</h2>
+        <ul>
+            <li><strong>1. Gọng kính mắt mèo</strong></li>
+            <li><strong>2. Gọng kính Oval</strong></li>
+            <li><strong>3. Gọng kính Browline</strong></li>
+            <li><strong>4. Gọng kính Titan xẻ cước</strong></li>
+            <li><strong>5. Gọng kính chữ nhật</strong></li>
+            <li><strong>6. Mua gọng kính ở đâu tốt nhất</strong></li>
+        </ul>
+        <p> Bạn đang tìm kiếm mẫu kính hot nhất hiện nay để nâng tầm phong cách? Xu hướng kính mắt thay đổi không ngừng, mỗi năm lại xuất hiện những thiết kế mới lạ, độc đáo. Năm 2025, các mẫu kính hot trend không chỉ mang lại vẻ ngoài thời thượng mà còn là sự kết hợp giữa tính thẩm mỹ và công nghệ tiên tiến, giúp tạo thoải mái cho người đeo kính.</p>
+        <P> Hãy cùng Mắt Kính Xí Xọn khám phá ngay top những mẫu mắt kính hot trend đang khuấy đảo xu hướng trong giới thời trang và tìm ra thiết kế phù hợp nhất với bạn!</P>
+        <P><strong>1. Gọng kính mắt mèo</strong></P>
+        <P> Gọng kính mắt mèo có phần đuôi hất lên, mang lại vẻ ngoài thanh lịch và sang trọng. Thiết kế giúp khuôn mặt tròn & oval trông thon gọn, sắc sảo, tạo điểm nhấn nổi bật và cuốn hút. Chất liệu gọng là nhựa cao cấp hoặc kim loại, mang lại sự đa dạng về phong cách và tính ứng dụng. Màu sắc họa tiết phong phú giúp người đeo dễ lựa chọn, phù hợp với sở thích và cá tính riêng biệt. Gọng kính mắt mèo không chỉ hỗ trợ tầm nhìn mà còn là phụ kiện giúp thể hiện phong cách thời trang ấn tượng.</P>
+        <img src="img/san pham/ảnh tạm thời/Ảnh chụp màn hình 2025-03-25 075856.png" alt="Gọng kính mắt mèo" style="width:100%; max-width:600px; display:block; margin:10px auto;">
+    
+        
+        <P><strong> 2. Gọng kính Oval</strong></P>
+            <P>Gọng kính oval là một trong những kiểu dáng kinh điển, mang lại vẻ ngoài thanh lịch. Thiết kế bo tròn mềm mại giúp gọng kính phù hợp với nhiều dáng mặt khác nhau. Kiểu dáng oval giúp cân đối đường nét khuôn mặt, tạo cảm giác nhẹ nhàng, mềm mại và giảm bớt sự góc cạnh thô cứng.</P>
+            <p>Gọng kính này thường được làm từ kim loại hoặc nhựa cao cấp, đảm bảo độ bền chắc, nhẹ nhàng và mang lại cảm giác thoải mái. Màu sắc và kích thước đa dạng giúp người đeo dễ dàng lựa chọn theo phong cách cá nhân, từ cổ điển đến hiện đại. Gọng kính oval không chỉ hỗ trợ tầm nhìn mà còn là phụ kiện thời trang tinh tế. Giúp người đeo trông sang trọng hơn.</p>
+            <img src="img/san pham/ảnh tạm thời/Ảnh chụp màn hình 2025-03-25 082515.png" alt="Gọng kính mắt mèo" style="width:100%; max-width:600px; display:block; margin:20px auto;">   
+            <P><strong>3. Gọng kính Browline</strong></P>
+            <p>Lấy cảm hứng từ những năm 1950, gọng kính Browline nổi bật với phần gọng trên dày hơn phần dưới, tạo điểm nhấn sắc nét cho khuôn mặt. Thiết kế này mang lại nét cổ điển nhưng vẫn giữ được sự hiện đại, thanh lịch, phù hợp với những ai yêu thích phong cách sang trọng.</p>
+          
+            
+            <p>Với khả năng tôn lên đường nét khuôn mặt, kính Browline đặc biệt phù hợp với người có gương mặt trái xoan hoặc tròn. Chất liệu gọng kết hợp giữa kim loại và nhựa acetate giúp tạo sự cân bằng giữa độ bền và sự thoải mái, khiến mẫu kính này trở thành lựa chọn lý tưởng cho nhiều phong cách khác nhau.</p>
+            <img src="img/san pham/ảnh tạm thời/Ảnh chụp màn hình 2025-03-25 084219.png" alt="Gọng kính mắt mèo" style="width:100%; max-width:600px; display:block; margin:20px auto;"> 
+            <p><strong> 4. Gọng Titan xẻ cước</strong></p>
+            <p>Gọng kính titan xẻ cước là sự kết hợp hoàn hảo giữa chất liệu titan cao cấp và thiết kế nửa gọng tinh tế. Chất liệu titan không chỉ mang lại độ bền vượt trội mà còn giúp gọng kính trở nên siêu nhẹ, tạo cảm giác thoải mái cho người đeo. Thiết kế xẻ cước với phần viền trên bằng kim loại và phần dưới cố định bằng dây cước, tạo nên vẻ thanh lịch và hiện đại. Sự kết hợp này không chỉ tôn lên phong cách thời trang mà còn đảm bảo sự bền bỉ và an toàn cho người sử dụng</p>
+            <img src="img/san pham/ảnh tạm thời/Ảnh chụp màn hình 2025-03-26 064134.png" alt="Gọng kính mắt mèo" style="width:100%; max-width:600px; display:block; margin:20px auto;"> 
+           
+            <p><strong> 5. Gọng kính hình chữ nhật</strong></p>
+            <p>Gọng kính chữ nhật là kiểu dáng phổ biến, phù hợp với nhiều phong cách khác nhau. Thiết kế dài và thon giúp tạo cảm giác khuôn mặt gọn gàng, sắc nét hơn, mang lại vẻ ngoài chuyên nghiệp và hiện đạiKiểu gọng này đặc biệt phù hợp với người có khuôn mặt tròn hoặc oval, giúp cân đối đường nét một cách hài hòa nhất. Chất liệu gọng thường làm từ kim loại hoặc nhựa cao cấp, đảm bảo độ bền chắc, nhẹ nhàng và mang lại sự thoải mái khi đeo. Với thiết kế nhỏ gọn, góc cạnh, mẫu kính này giúp tôn lên đường nét khuôn mặt, đặc biệt phù hợp với những ai yêu thích phong cách minimalism nhưng vẫn muốn giữ nét cá tính riêng.</p>
+            <img src="img/san pham/ảnh tạm thời/Ảnh chụp màn hình 2025-03-25 144722.png" alt="Gọng kính mắt mèo" style="width:100%; max-width:600px; display:block; margin:20px auto;">
+           
+            <p><strong> 6.  MUA MẮT KÍNH Ở ĐÂU TỐT NHẤT</strong></p>
+            <P>Dù bạn yêu thích kính mắt mèo nhí nhảnh, kính Oval thanh lịch, kính chữ nhật cổ điển, kính Browline sang trọng hay kính Titan xẻ cước bền bỉ, Mắt Kính Xí Xọn luôn cập nhật những xu hướng mới nhất để mang đến trải nghiệm mua sắm tuyệt vời</P>
+            <P>Khi lựa chọn mắt kính của Xí Xọn, bạn không chỉ sở hữu một phụ kiện thời trang chính hãng đẳng cấp mà còn đảm bảo sự bảo vệ tối ưu cho đôi mắt. Hãy khám phá và trải nghiệm sự đa dạng trong thiết kế và chất lượng của Xí Xọn để thể hiện phong cách riêng của bạn ngay hôm nay</P>
+            <P>             Xem thêm:</P>
+            <P>Các loại gọng kính phù hợp cho khuôn mặt của bạn : https://kinhdep.vn/chon-gong-kinh-phu-hopvv-xixon </P>
+            <P>Những lưu ý khi chọn kính cho da ngăm :  https://kinhdep.vn/kinh-phu-hop-cho-da-ngam-xixon </P>
+            <P>Tròng kính mát có độ: https://kinhdep.vn/trong-kinh-mat-co-do-xixon  </P>
+
+        </section>
+
+
+
+    <!-- 🔥 Script: Ẩn header khi cuộn xuống -->
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Cuộn xuống: Ẩn header
+                navbar.style.top = "-80px";
+            } else {
+                // Cuộn lên: Hiện header
+                navbar.style.top = "20px";
+            }
+            lastScrollTop = scrollTop;
+        });
+        
+document.querySelector('.contact-button').addEventListener('click', function(event) {
+    event.preventDefault(); // Ngăn chặn nhảy ngay lập tức
+    document.querySelector('#footer').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+
+
+    </script>
+    <footer id="footer">
+    
+<footer class="footer">
+    <div class="container">
+        <div class="footer-logo">
+            <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/XÍ XỌN logo.png" alt="Logo">
+            <p>Đăng ký để nhận tin mới nhất</p>
+            <div class="subscribe-box">
+                <input type="email" placeholder="Để lại email của bạn">
+                <button><i class="arrow-icon">➜</i></button>
+            </div>
+            <div class="social-icons">
+                <div class="icons">
+                    <a href="https://www.facebook.com/profile.php?id=61573716576466" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/_matkinhxixon_/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                    <a href="https://www.tiktok.com/@matkinhxixon" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    
+                    <a href="https://shopee.vn/kinhmatxixon" target="_blank">
+                        <i class="fas fa-store"></i>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer-links">
+           
+        </div>
+        <div class="footer-contact">
+            <h4>THÔNG TIN LIÊN HỆ</h4>
+            <p> Phone: (000) 1900-6569</p>
+            <p> Mail:  matkinhxixon@gmail.com</p>
+            <p></p>
+            <p><strong>SẢN PHẨM</strong></p>
+            <P> Kính mắt</P>
+            <p>Tròng Kính</p>
+            <p>Gọng Kính</p>
+            <p> Phụ Kiện Kính</p>
+        </div>
+        <div class="footer-policy">
+            <h4>CHÍNH SÁCH MUA HÀNG</h4>
+            <ul>
+                <li><a href="#">Hình thức thanh toán</a></li>
+                <li><a href="#">Chính sách giao hàng</a></li>
+                <li><a href="#">Chính sách bảo hành</a></li>
+            </ul>
+            <p>MST: 01234567891</p>
+            <div class="certifications">
+                <img src="img/san pham/NHẬN DIỆN THƯƠNG HIỆU/bo-cong-thuong.png" alt="Bộ Công Thương">
+               
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p> Copy right Mắt Kính XÍ Xọn ©2025.</p>
+    </div>
+</footer>
+
+</body>
+</html>
+
